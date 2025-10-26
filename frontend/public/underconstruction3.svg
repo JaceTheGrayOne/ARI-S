@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <!-- Base dark field -->
+  <rect width="1600" height="900" fill="#121516"></rect>
+
+  <!-- Diagonal metallic stripe (angled bottom-left to top-right) -->
+  <linearGradient id="ominentGold" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#C8A23D"></stop>
+    <stop offset="100%" stop-color="#7A5B23"></stop>
+  </linearGradient>
+
+  <!-- Single bold stripe -->
+  <polygon points="0,900 400,900 1600,0 1200,0" fill="url(#ominentGold)" opacity="0.12"></polygon>
+
+  <!-- Subtle vignette overlay -->
+  <radialGradient id="vignette" cx="50%" cy="50%" r="75%">
+    <stop offset="60%" stop-color="transparent"></stop>
+    <stop offset="100%" stop-color="#000000" stop-opacity="0.6"></stop>
+  </radialGradient>
+  <rect width="1600" height="900" fill="url(#vignette)" opacity="0.9"></rect>
+</svg>

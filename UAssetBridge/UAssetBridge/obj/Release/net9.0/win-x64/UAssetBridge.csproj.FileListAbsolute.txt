@@ -1,0 +1,403 @@
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\UAssetBridge.exe
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\UAssetBridge.deps.json
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\UAssetBridge.runtimeconfig.json
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\UAssetBridge.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\UAssetBridge.pdb
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\Microsoft.CSharp.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\Microsoft.VisualBasic.Core.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\Microsoft.VisualBasic.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\Microsoft.Win32.Primitives.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\Microsoft.Win32.Registry.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.AppContext.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Buffers.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Collections.Concurrent.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Collections.Immutable.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Collections.NonGeneric.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Collections.Specialized.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Collections.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.ComponentModel.Annotations.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.ComponentModel.DataAnnotations.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.ComponentModel.EventBasedAsync.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.ComponentModel.Primitives.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.ComponentModel.TypeConverter.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.ComponentModel.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Configuration.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Console.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Core.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Data.Common.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Data.DataSetExtensions.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Data.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Diagnostics.Contracts.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Diagnostics.Debug.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Diagnostics.DiagnosticSource.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Diagnostics.FileVersionInfo.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Diagnostics.Process.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Diagnostics.StackTrace.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Diagnostics.TextWriterTraceListener.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Diagnostics.Tools.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Diagnostics.TraceSource.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Diagnostics.Tracing.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Drawing.Primitives.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Drawing.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Dynamic.Runtime.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Formats.Asn1.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Formats.Tar.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Globalization.Calendars.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Globalization.Extensions.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Globalization.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.Compression.Brotli.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.Compression.FileSystem.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.Compression.ZipFile.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.Compression.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.FileSystem.AccessControl.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.FileSystem.DriveInfo.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.FileSystem.Primitives.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.FileSystem.Watcher.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.FileSystem.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.IsolatedStorage.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.MemoryMappedFiles.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.Pipelines.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.Pipes.AccessControl.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.Pipes.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.UnmanagedMemoryStream.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Linq.Expressions.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Linq.Parallel.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Linq.Queryable.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Linq.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Memory.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.Http.Json.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.Http.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.HttpListener.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.Mail.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.NameResolution.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.NetworkInformation.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.Ping.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.Primitives.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.Quic.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.Requests.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.Security.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.ServicePoint.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.Sockets.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.WebClient.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.WebHeaderCollection.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.WebProxy.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.WebSockets.Client.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.WebSockets.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Numerics.Vectors.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Numerics.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.ObjectModel.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Private.CoreLib.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Private.DataContractSerialization.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Private.Uri.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Private.Xml.Linq.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Private.Xml.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Reflection.DispatchProxy.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Reflection.Emit.ILGeneration.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Reflection.Emit.Lightweight.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Reflection.Emit.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Reflection.Extensions.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Reflection.Metadata.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Reflection.Primitives.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Reflection.TypeExtensions.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Reflection.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Resources.Reader.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Resources.ResourceManager.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Resources.Writer.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.CompilerServices.Unsafe.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.CompilerServices.VisualC.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.Extensions.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.Handles.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.InteropServices.JavaScript.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.InteropServices.RuntimeInformation.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.InteropServices.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.Intrinsics.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.Loader.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.Numerics.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.Serialization.Formatters.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.Serialization.Json.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.Serialization.Primitives.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.Serialization.Xml.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.Serialization.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Security.AccessControl.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Security.Claims.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Security.Cryptography.Algorithms.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Security.Cryptography.Cng.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Security.Cryptography.Csp.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Security.Cryptography.Encoding.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Security.Cryptography.OpenSsl.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Security.Cryptography.Primitives.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Security.Cryptography.X509Certificates.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Security.Cryptography.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Security.Principal.Windows.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Security.Principal.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Security.SecureString.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Security.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.ServiceModel.Web.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.ServiceProcess.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Text.Encoding.CodePages.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Text.Encoding.Extensions.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Text.Encoding.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Text.Encodings.Web.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Text.Json.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Text.RegularExpressions.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Threading.Channels.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Threading.Overlapped.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Threading.Tasks.Dataflow.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Threading.Tasks.Extensions.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Threading.Tasks.Parallel.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Threading.Tasks.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Threading.Thread.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Threading.ThreadPool.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Threading.Timer.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Threading.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Transactions.Local.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Transactions.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.ValueTuple.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Web.HttpUtility.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Web.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Windows.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Xml.Linq.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Xml.ReaderWriter.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Xml.Serialization.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Xml.XDocument.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Xml.XPath.XDocument.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Xml.XPath.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Xml.XmlDocument.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Xml.XmlSerializer.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Xml.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\WindowsBase.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\mscorlib.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\netstandard.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\Microsoft.DiaSymReader.Native.amd64.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.Compression.Native.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\clretwrc.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\clrgc.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\clrgcexp.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\clrjit.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\coreclr.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\createdump.exe
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\hostfxr.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\hostpolicy.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\mscordaccore.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\mscordaccore_amd64_amd64_9.0.825.36511.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\mscordbi.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\mscorrc.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\msquic.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\obj\Release\net9.0\win-x64\UAssetBridge.GeneratedMSBuildEditorConfig.editorconfig
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\obj\Release\net9.0\win-x64\UAssetBridge.AssemblyInfoInputs.cache
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\obj\Release\net9.0\win-x64\UAssetBridge.AssemblyInfo.cs
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\obj\Release\net9.0\win-x64\UAssetBridge.csproj.CoreCompileInputs.cache
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\obj\Release\net9.0\win-x64\UAssetBr.D17126BA.Up2Date
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\obj\Release\net9.0\win-x64\UAssetBridge.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\obj\Release\net9.0\win-x64\refint\UAssetBridge.dll
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\obj\Release\net9.0\win-x64\UAssetBridge.pdb
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\obj\Release\net9.0\win-x64\UAssetBridge.genruntimeconfig.cache
+G:\Grounded\Modding\TINKR Toolkit\TINKR_Toolkit\UAssetBridge\UAssetBridge\obj\Release\net9.0\win-x64\ref\UAssetBridge.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\UAssetBridge.exe
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\UAssetBridge.deps.json
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\UAssetBridge.runtimeconfig.json
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\UAssetBridge.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\UAssetBridge.pdb
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\Microsoft.CSharp.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\Microsoft.VisualBasic.Core.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\Microsoft.VisualBasic.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\Microsoft.Win32.Primitives.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\Microsoft.Win32.Registry.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.AppContext.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Buffers.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Collections.Concurrent.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Collections.Immutable.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Collections.NonGeneric.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Collections.Specialized.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Collections.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.ComponentModel.Annotations.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.ComponentModel.DataAnnotations.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.ComponentModel.EventBasedAsync.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.ComponentModel.Primitives.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.ComponentModel.TypeConverter.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.ComponentModel.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Configuration.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Console.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Core.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Data.Common.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Data.DataSetExtensions.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Data.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Diagnostics.Contracts.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Diagnostics.Debug.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Diagnostics.DiagnosticSource.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Diagnostics.FileVersionInfo.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Diagnostics.Process.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Diagnostics.StackTrace.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Diagnostics.TextWriterTraceListener.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Diagnostics.Tools.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Diagnostics.TraceSource.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Diagnostics.Tracing.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Drawing.Primitives.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Drawing.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Dynamic.Runtime.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Formats.Asn1.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Formats.Tar.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Globalization.Calendars.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Globalization.Extensions.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Globalization.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.Compression.Brotli.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.Compression.FileSystem.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.Compression.ZipFile.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.Compression.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.FileSystem.AccessControl.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.FileSystem.DriveInfo.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.FileSystem.Primitives.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.FileSystem.Watcher.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.FileSystem.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.IsolatedStorage.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.MemoryMappedFiles.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.Pipelines.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.Pipes.AccessControl.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.Pipes.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.UnmanagedMemoryStream.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Linq.Expressions.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Linq.Parallel.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Linq.Queryable.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Linq.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Memory.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.Http.Json.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.Http.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.HttpListener.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.Mail.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.NameResolution.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.NetworkInformation.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.Ping.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.Primitives.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.Quic.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.Requests.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.Security.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.ServicePoint.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.Sockets.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.WebClient.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.WebHeaderCollection.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.WebProxy.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.WebSockets.Client.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.WebSockets.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Net.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Numerics.Vectors.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Numerics.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.ObjectModel.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Private.CoreLib.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Private.DataContractSerialization.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Private.Uri.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Private.Xml.Linq.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Private.Xml.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Reflection.DispatchProxy.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Reflection.Emit.ILGeneration.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Reflection.Emit.Lightweight.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Reflection.Emit.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Reflection.Extensions.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Reflection.Metadata.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Reflection.Primitives.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Reflection.TypeExtensions.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Reflection.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Resources.Reader.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Resources.ResourceManager.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Resources.Writer.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.CompilerServices.Unsafe.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.CompilerServices.VisualC.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.Extensions.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.Handles.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.InteropServices.JavaScript.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.InteropServices.RuntimeInformation.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.InteropServices.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.Intrinsics.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.Loader.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.Numerics.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.Serialization.Formatters.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.Serialization.Json.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.Serialization.Primitives.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.Serialization.Xml.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.Serialization.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Runtime.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Security.AccessControl.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Security.Claims.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Security.Cryptography.Algorithms.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Security.Cryptography.Cng.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Security.Cryptography.Csp.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Security.Cryptography.Encoding.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Security.Cryptography.OpenSsl.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Security.Cryptography.Primitives.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Security.Cryptography.X509Certificates.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Security.Cryptography.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Security.Principal.Windows.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Security.Principal.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Security.SecureString.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Security.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.ServiceModel.Web.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.ServiceProcess.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Text.Encoding.CodePages.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Text.Encoding.Extensions.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Text.Encoding.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Text.Encodings.Web.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Text.Json.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Text.RegularExpressions.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Threading.Channels.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Threading.Overlapped.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Threading.Tasks.Dataflow.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Threading.Tasks.Extensions.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Threading.Tasks.Parallel.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Threading.Tasks.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Threading.Thread.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Threading.ThreadPool.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Threading.Timer.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Threading.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Transactions.Local.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Transactions.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.ValueTuple.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Web.HttpUtility.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Web.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Windows.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Xml.Linq.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Xml.ReaderWriter.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Xml.Serialization.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Xml.XDocument.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Xml.XPath.XDocument.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Xml.XPath.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Xml.XmlDocument.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Xml.XmlSerializer.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.Xml.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\WindowsBase.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\mscorlib.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\netstandard.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\Microsoft.DiaSymReader.Native.amd64.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\System.IO.Compression.Native.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\clretwrc.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\clrgc.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\clrgcexp.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\clrjit.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\coreclr.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\createdump.exe
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\hostfxr.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\hostpolicy.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\mscordaccore.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\mscordaccore_amd64_amd64_9.0.825.36511.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\mscordbi.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\mscorrc.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\msquic.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\obj\Release\net9.0\win-x64\UAssetBridge.GeneratedMSBuildEditorConfig.editorconfig
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\obj\Release\net9.0\win-x64\UAssetBridge.AssemblyInfoInputs.cache
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\obj\Release\net9.0\win-x64\UAssetBridge.AssemblyInfo.cs
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\obj\Release\net9.0\win-x64\UAssetBridge.csproj.CoreCompileInputs.cache
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\obj\Release\net9.0\win-x64\UAssetBr.D17126BA.Up2Date
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\obj\Release\net9.0\win-x64\UAssetBridge.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\obj\Release\net9.0\win-x64\refint\UAssetBridge.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\obj\Release\net9.0\win-x64\UAssetBridge.pdb
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\obj\Release\net9.0\win-x64\UAssetBridge.genruntimeconfig.cache
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\obj\Release\net9.0\win-x64\ref\UAssetBridge.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\UAssetAPI.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\UAssetAPI.pdb
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\obj\Release\net9.0\win-x64\UAssetBridge.csproj.AssemblyReference.cache
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\Newtonsoft.Json.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\ZstdSharp.dll
