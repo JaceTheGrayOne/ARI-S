@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("UAssetBridge")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c1cfddee1e1d0a0319e5ed255bb8c2cf4cbdc5ac")]
 [assembly: System.Reflection.AssemblyProductAttribute("UAssetBridge")]
 [assembly: System.Reflection.AssemblyTitleAttribute("UAssetBridge")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

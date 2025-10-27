@@ -8,7 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Resources\UAssetAPI\UAssetAPI-master\UAssetAPI\UAssetAPI.csproj" />
+    <Reference Include="UAssetAPI">
+      <HintPath>UAssetAPI.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>

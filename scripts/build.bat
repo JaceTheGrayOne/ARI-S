@@ -13,15 +13,28 @@ if %errorlevel% neq 0 (
 
 echo.
 echo Copying retoc files...
-cd ..\..\..\Resources\retoc
-copy retoc.exe ..\..\ARI-S\build\
-copy oo2core_9_win64.dll ..\..\ARI-S\build\
+cd ..\..
+copy retoc\retoc.exe build\
+copy retoc\oo2core_9_win64.dll build\
 
 echo.
-echo Setting up UAssetAPI directory...
-cd ..\..\ARI-S
+echo Setting up bin directory structure...
+if not exist bin\retoc mkdir bin\retoc
 if not exist bin\UAssetAPI mkdir bin\UAssetAPI
-for %%f in (build\*.*) do copy /Y "%%f" bin\UAssetAPI\ >nul 2>&1
+
+echo Copying retoc to bin...
+copy retoc\retoc.exe bin\retoc\
+copy retoc\oo2core_9_win64.dll bin\retoc\
+copy retoc\LICENSE bin\retoc\ 2>nul
+copy retoc\README.md bin\retoc\ 2>nul
+
+echo Copying UAssetBridge to bin...
+copy build\UAssetBridge.exe bin\UAssetAPI\
+copy build\UAssetBridge.dll bin\UAssetAPI\
+copy build\UAssetAPI.dll bin\UAssetAPI\
+copy build\*.json bin\UAssetAPI\ 2>nul
+copy build\ZstdSharp.dll bin\UAssetAPI\ 2>nul
+copy build\Newtonsoft.Json.dll bin\UAssetAPI\ 2>nul
 
 echo.
 echo Building Wails application...
@@ -35,5 +48,5 @@ if %errorlevel% neq 0 (
 
 echo.
 echo Build completed successfully!
-echo Executable: build\bin\ARI-S.exe
+echo Executable: bin\ARI-S.exe
 pause

@@ -18,7 +18,6 @@ G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\UAs
 G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\UAssetBridge.dll
 G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\UAssetBridge.pdb
 G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\Newtonsoft.Json.dll
-G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\ZstdSharp.dll
 G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\UAssetAPI.dll
 G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\UAssetAPI.pdb
 G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\obj\Release\net9.0\UAssetBridge.csproj.AssemblyReference.cache
@@ -32,3 +31,4 @@ G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\obj\Release\net9.0\ref
 G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\obj\Release\net9.0\UAssetBridge.pdb
 G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\obj\Release\net9.0\UAssetBridge.genruntimeconfig.cache
 G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\obj\Release\net9.0\ref\UAssetBridge.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\obj\Release\net9.0\UAssetBridge.sourcelink.json

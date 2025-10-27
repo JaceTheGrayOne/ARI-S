@@ -400,4 +400,4 @@ G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win
 G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\UAssetAPI.pdb
 G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\obj\Release\net9.0\win-x64\UAssetBridge.csproj.AssemblyReference.cache
 G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\Newtonsoft.Json.dll
-G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\bin\Release\net9.0\win-x64\ZstdSharp.dll
+G:\Grounded\Modding\ARI-S\ARI-S\UAssetBridge\UAssetBridge\obj\Release\net9.0\win-x64\UAssetBridge.sourcelink.json
