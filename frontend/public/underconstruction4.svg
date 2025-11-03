@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <!-- Black base -->
+  <rect width="1600" height="900" fill="#000000"></rect>
+
+  <!-- Single bold hazard-yellow stripe (bottom-left → top-right) -->
+  <polygon points="0,900 400,900 1600,0 1200,0" fill="#FFD23C"></polygon>
+</svg>

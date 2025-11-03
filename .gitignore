@@ -1,0 +1,122 @@
+# If you prefer the allow list template instead of the deny list, see community template:
+# https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
+
+# VS Code Settings
+.vscode/*
+!.vscode/settings.json
+
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+!dependencies/**/*.dll  # Allow DLLs in dependencies folder for CI/CD
+build/*.dll              # But exclude DLLs from build folder (these are artifacts)
+build/*.exe              # Exclude executables from build folder
+*.so
+*.dylib
+*.zip
+*.7z
+*.rar
+*.mp4
+*.wav
+*.png
+!build/**/*.png          # Allow PNG icons in build folder
+!build/**/*.ico          # Allow ICO icons in build folder
+!build/**/*.icns         # Allow ICNS icons in build folder
+*.jpg
+*.jpeg
+*.bmp
+*.dds
+*.psd
+
+# Test binary, built with `go test -c`
+*.test
+
+# Code coverage profiles and other test artifacts
+*.out
+coverage.*
+*.coverprofile
+profile.cov
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+# Go workspace file
+go.work
+go.work.sum
+
+# env file
+.env
+.env.*
+
+# Editor/IDE
+# .idea/
+# .vscode/
+
+# Custom ignores - Build outputs
+/frontend/node_modules
+/dist
+/bin
+node_modules/
+frontend/dist/
+pnpm-lock.yaml
+npm-debug.log*
+bin/
+dist/
+dist/**
+frontend/bindings/
+
+# Development and tooling
+.claude/
+.task/
+*.syso
+*.log
+wails.log
+test-output.txt
+
+# Workspace and exports
+exports/**
+workspace/**
+logs/**
+secrets/**
+
+# User data
+config.json
+
+# Unreal Engine / mod assets
+*.uasset
+*.uexp
+*.umap
+*.udic
+*.ubulk
+*.pak
+*.ucas
+*.utoc
+*.sig
+
+# OS-specific
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# C# / .NET build artifacts
+**/obj/
+**/bin/
+*.pdb
+*.user
+*.suo
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.mdb
+*.opendb
+*.VC.db
+*.VC.VC.opendb
+
+# Temporary files
+_nul
+*.tmp
+*.temp

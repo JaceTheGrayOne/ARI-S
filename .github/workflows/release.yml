@@ -1,0 +1,414 @@
+  # .github/workflows/release.yml
+
+  name: Build and Release ARI-S
+
+  # Trigger Conditions
+  # - Runs on every push to main branch for continuous integration
+  # - Runs on version tags (v*.*.* format) to create releases
+  on:
+    push:
+      branches:
+        - main
+      tags:
+        - 'v*.*.*'           # Stable releases (e.g., v1.0.0)
+        - 'v*.*.*-beta.*'    # Beta releases (e.g., v1.0.0-beta.1)
+        - 'v*.*.*-alpha.*'   # Alpha releases (e.g., v1.0.0-alpha.1)
+    # Optional: Allow manual workflow dispatch for testing
+    workflow_dispatch:
+      inputs:
+        create_release:
+          description: 'Create a GitHub release (true/false)'
+          required: false
+          default: 'false'
+
+  # Environment Variables
+  env:
+    GO_VERSION: '1.23'           # Match your go.mod requirement
+    NODE_VERSION: '20'           # LTS version for Node.js
+    WAILS_VERSION: 'latest'      # Wails v3 CLI version
+
+  jobs:
+    build-windows:
+      name: Build Windows Binary
+      runs-on: windows-latest
+
+      permissions:
+        contents: write  # Required for creating releases and uploading artifacts
+
+      steps:
+        # ============================================
+        # STEP 1: Checkout Repository
+        # ============================================
+        - name: Checkout code
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 0  # Fetch all history for proper versioning
+            lfs: true       # Pull Git LFS files (appicon.png, etc.)
+
+        # ============================================
+        # STEP 2: Setup Go Environment
+        # ============================================
+        - name: Setup Go
+          uses: actions/setup-go@v5
+          with:
+            go-version: ${{ env.GO_VERSION }}
+            cache: true
+            cache-dependency-path: go.sum
+
+        # ============================================
+        # STEP 3: Setup Node.js Environment
+        # ============================================
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: ${{ env.NODE_VERSION }}
+            cache: 'npm'
+            cache-dependency-path: frontend/package-lock.json
+
+        # ============================================
+        # STEP 4: Install Frontend Dependencies
+        # ============================================
+        - name: Install frontend dependencies
+          shell: pwsh
+          run: |
+            Write-Host "Installing frontend dependencies..." -ForegroundColor Cyan
+            cd frontend
+            npm ci --prefer-offline --no-audit
+            cd ..
+
+        # ============================================
+        # STEP 5: Install Wails CLI
+        # ============================================
+        - name: Install Wails CLI
+          shell: pwsh
+          run: |
+            Write-Host "Installing Wails v3 CLI..." -ForegroundColor Cyan
+            go install github.com/wailsapp/wails/v3/cmd/wails3@${{ env.WAILS_VERSION }}
+
+            # Add GOPATH/bin to PATH for subsequent steps
+            $goPath = go env GOPATH
+            $goBin = Join-Path $goPath "bin"
+            Write-Host "Adding $goBin to PATH" -ForegroundColor Cyan
+            echo "$goBin" >> $env:GITHUB_PATH
+
+            # Verify installation (add to current session PATH for this step)
+            $env:PATH = "$goBin;$env:PATH"
+            wails3 version
+
+        # ============================================
+        # STEP 6: Setup .NET SDK
+        # ============================================
+        - name: Setup .NET SDK
+          uses: actions/setup-dotnet@v4
+          with:
+            dotnet-version: '9.0.x'
+
+        # ============================================
+        # STEP 7: Copy UAssetAPI.dll for Build
+        # ============================================
+        - name: Copy UAssetAPI.dll to build location
+          shell: pwsh
+          run: |
+            Write-Host "Copying UAssetAPI.dll to UAssetBridge project..." -ForegroundColor Cyan
+            Copy-Item "dependencies/UAssetAPI/UAssetAPI.dll" "UAssetBridge/UAssetBridge/" -Force
+            Write-Host "UAssetAPI.dll copied successfully" -ForegroundColor Green
+
+        # ============================================
+        # STEP 8: Restore UAssetBridge Dependencies
+        # ============================================
+        - name: Restore UAssetBridge NuGet packages
+          shell: pwsh
+          run: |
+            Write-Host "Restoring NuGet packages for UAssetBridge..." -ForegroundColor Cyan
+            dotnet restore UAssetBridge/UAssetBridge/UAssetBridge.csproj -r win-x64
+            Write-Host "NuGet packages restored successfully" -ForegroundColor Green
+
+        # ============================================
+        # STEP 9: Build .NET UAssetBridge Component
+        # ============================================
+        - name: Build UAssetBridge
+          shell: pwsh
+          run: |
+            Write-Host "Building UAssetBridge (.NET component)..." -ForegroundColor Cyan
+
+            # Build the C# project
+            dotnet publish UAssetBridge/UAssetBridge/UAssetBridge.csproj `
+              -c Release `
+              -r win-x64 `
+              --self-contained true `
+              -p:PublishSingleFile=false `
+              -p:DebugType=none `
+              -p:DebugSymbols=false `
+              --no-restore
+
+            Write-Host "UAssetBridge build complete" -ForegroundColor Green
+
+        # ============================================
+        # STEP 10: Extract Version from Tag or Commit
+        # ============================================
+        - name: Extract version
+          id: version
+          shell: pwsh
+          run: |
+            if ("${{ github.ref }}" -match "refs/tags/v(.*)") {
+              $VERSION = $matches[1]
+              Write-Host "Version from tag: $VERSION"
+              echo "version=$VERSION" >> $env:GITHUB_OUTPUT
+              echo "is_release=true" >> $env:GITHUB_OUTPUT
+
+              # Detect if this is a pre-release (beta, alpha, rc, etc.)
+              if ($VERSION -match "(alpha|beta|rc|pre)") {
+                Write-Host "Detected pre-release version" -ForegroundColor Yellow
+                echo "is_prerelease=true" >> $env:GITHUB_OUTPUT
+              } else {
+                Write-Host "Detected stable release version" -ForegroundColor Green
+                echo "is_prerelease=false" >> $env:GITHUB_OUTPUT
+              }
+            } else {
+              $SHORT_SHA = "${{ github.sha }}".Substring(0, 7)
+              $VERSION = "dev-$SHORT_SHA"
+              Write-Host "Development version: $VERSION"
+              echo "version=$VERSION" >> $env:GITHUB_OUTPUT
+              echo "is_release=false" >> $env:GITHUB_OUTPUT
+              echo "is_prerelease=false" >> $env:GITHUB_OUTPUT
+            }
+
+        # ============================================
+        # STEP 11: Build Application with Wails
+        # ============================================
+        - name: Build ARI-S with Wails
+          shell: pwsh
+          working-directory: ${{ github.workspace }}
+          env:
+            PRODUCTION: "true"
+          run: |
+            Write-Host "Building ARI-S application..." -ForegroundColor Cyan
+            Write-Host ""
+
+            # Verify all prerequisites are available
+            Write-Host "Verifying build prerequisites..." -ForegroundColor Cyan
+
+            $npmCmd = Get-Command npm -ErrorAction SilentlyContinue
+            if ($npmCmd) {
+              Write-Host "  ✓ npm: $($npmCmd.Source)" -ForegroundColor Green
+            } else {
+              Write-Error "npm not found in PATH"
+              exit 1
+            }
+
+            $wails3Cmd = Get-Command wails3 -ErrorAction SilentlyContinue
+            if ($wails3Cmd) {
+              Write-Host "  ✓ wails3: $($wails3Cmd.Source)" -ForegroundColor Green
+            } else {
+              Write-Error "wails3 not found in PATH"
+              exit 1
+            }
+
+            $goCmd = Get-Command go -ErrorAction SilentlyContinue
+            if ($goCmd) {
+              Write-Host "  ✓ go: $($goCmd.Source)" -ForegroundColor Green
+            } else {
+              Write-Error "go not found in PATH"
+              exit 1
+            }
+
+            Write-Host ""
+
+            # Verify appicon.png exists and is not a Git LFS pointer
+            if (Test-Path "build/appicon.png") {
+              $iconSize = (Get-Item "build/appicon.png").Length
+              if ($iconSize -lt 1000) {
+                Write-Error "appicon.png appears to be a Git LFS pointer file ($iconSize bytes). Git LFS files were not pulled."
+                exit 1
+              }
+              Write-Host "  ✓ appicon.png: $iconSize bytes" -ForegroundColor Green
+            } else {
+              Write-Error "build/appicon.png not found"
+              exit 1
+            }
+
+            Write-Host ""
+
+            # Build for Windows using Wails Task
+            Write-Host "Starting Wails build..." -ForegroundColor Cyan
+            wails3 task windows:build
+
+            if ($LASTEXITCODE -ne 0) {
+              Write-Error "Wails build command failed with exit code $LASTEXITCODE"
+              exit $LASTEXITCODE
+            }
+
+            Write-Host ""
+
+            # Verify the build output
+            if (Test-Path "bin/ARI-S.exe") {
+              $size = (Get-Item "bin/ARI-S.exe").Length / 1MB
+              Write-Host "✓ Build successful!" -ForegroundColor Green
+              Write-Host "  Binary: bin/ARI-S.exe" -ForegroundColor Green
+              Write-Host "  Size: $([math]::Round($size, 2)) MB" -ForegroundColor Green
+            } else {
+              Write-Error "Build failed! Binary not found at bin/ARI-S.exe"
+              Write-Host "Contents of bin directory:" -ForegroundColor Yellow
+              if (Test-Path "bin") {
+                Get-ChildItem "bin" -Recurse | Select-Object FullName
+              } else {
+                Write-Host "  bin/ directory does not exist" -ForegroundColor Red
+              }
+              exit 1
+            }
+
+        # ============================================
+        # STEP 12: Package Build Artifacts
+        # ============================================
+        - name: Package release artifacts
+          shell: pwsh
+          run: |
+            Write-Host "Packaging release artifacts..." -ForegroundColor Cyan
+
+            $VERSION = "${{ steps.version.outputs.version }}"
+            $ARCHIVE_NAME = "ARI-S-v$VERSION-windows-x64.zip"
+
+            # Create packaging directory
+            New-Item -ItemType Directory -Path "release-package" -Force | Out-Null
+
+            # Copy main executable
+            Copy-Item "bin/ARI-S.exe" "release-package/" -Force
+
+            # Copy dependencies folder structure
+            if (Test-Path "bin/dependencies") {
+              Copy-Item "bin/dependencies" "release-package/" -Recurse -Force
+            }
+
+            # Copy documentation
+            Copy-Item "README.md" "release-package/" -Force -ErrorAction SilentlyContinue
+            Copy-Item "CREDITS.md" "release-package/" -Force -ErrorAction SilentlyContinue
+            Copy-Item "BUILDING.md" "release-package/" -Force -ErrorAction SilentlyContinue
+
+            # Create ZIP archive
+            Compress-Archive -Path "release-package/*" -DestinationPath $ARCHIVE_NAME -Force
+
+            # Output artifact info
+            $zipSize = (Get-Item $ARCHIVE_NAME).Length / 1MB
+            Write-Host "Archive created: $ARCHIVE_NAME ($([math]::Round($zipSize, 2)) MB)" -ForegroundColor Green
+
+            # Save archive name for later steps
+            echo "archive_name=$ARCHIVE_NAME" >> $env:GITHUB_OUTPUT
+          id: package
+
+        # ============================================
+        # STEP 13: Upload Build Artifact
+        # ============================================
+        - name: Upload build artifact
+          uses: actions/upload-artifact@v4
+          with:
+            name: ARI-S-windows-x64
+            path: ${{ steps.package.outputs.archive_name }}
+            retention-days: 30
+            if-no-files-found: error
+
+        # ============================================
+        # STEP 14: Generate Release Notes
+        # ============================================
+        - name: Generate release notes
+          if: steps.version.outputs.is_release == 'true'
+          id: release_notes
+          shell: pwsh
+          run: |
+            $VERSION = "${{ steps.version.outputs.version }}"
+            $IS_PRERELEASE = "${{ steps.version.outputs.is_prerelease }}"
+
+            # Generate pre-release warning if applicable
+            $PRERELEASE_WARNING = ""
+            if ($IS_PRERELEASE -eq "true") {
+              $PRERELEASE_WARNING = @"
+            > **⚠️ PRE-RELEASE VERSION**
+            > This is a pre-release version and may contain bugs or incomplete features.
+            > Use in production environments at your own risk.
+
+            "@
+            }
+
+            # Generate release notes
+            $NOTES = @"
+            # ARI-S v$VERSION
+
+            $PRERELEASE_WARNING
+            ## What's New
+
+            Asset Reconfiguration and Integration System - Windows Release
+
+            ### Features
+            - **Package Manager**: Pack/Unpack Unreal Engine IoStore packages
+            - **UAsset Manager**: Export/Import UAsset files to/from JSON
+            - **DLL Injector**: Process enumeration and native DLL injection
+            - **Modern UI**: Clean interface with dark theme and real-time console
+
+            ## Installation
+
+            1. Download ``ARI-S-v$VERSION-windows-x64.zip``
+            2. Extract to your preferred location
+            3. Run ``ARI-S.exe``
+
+            On first run, the application will automatically extract its dependencies.
+
+            ## Requirements
+
+            - **Windows 10/11** (64-bit)
+            - **WebView2 Runtime** (usually pre-installed on Windows 11)
+
+            ## Documentation
+
+            See [README.md](https://github.com/${{ github.repository }}/blob/main/README.md) for detailed usage instructions.     
+
+            ## Build Information
+
+            - **Commit**: ${{ github.sha }}
+            - **Build Date**: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss UTC")
+            - **Go Version**: ${{ env.GO_VERSION }}
+            - **Wails Version**: ${{ env.WAILS_VERSION }}
+
+            ---
+
+            **Full Changelog**: https://github.com/${{ github.repository }}/compare/v$VERSION...HEAD
+            "@
+
+            # Save to file (handle multiline in GitHub Actions)
+            $NOTES | Out-File -FilePath "release_notes.md" -Encoding UTF8
+
+            # Also output a truncated version for the step summary
+            echo "### Release Notes" >> $env:GITHUB_STEP_SUMMARY
+            echo "" >> $env:GITHUB_STEP_SUMMARY
+            echo $NOTES >> $env:GITHUB_STEP_SUMMARY
+
+        # ============================================
+        # STEP 15: Create GitHub Release
+        # ============================================
+        - name: Create GitHub Release
+          if: steps.version.outputs.is_release == 'true'
+          uses: softprops/action-gh-release@v1
+          with:
+            tag_name: v${{ steps.version.outputs.version }}
+            name: ARI-S v${{ steps.version.outputs.version }}
+            body_path: release_notes.md
+            draft: false          # Set to true for draft releases
+            prerelease: ${{ steps.version.outputs.is_prerelease }}  # Auto-detected from tag (alpha/beta/rc)
+            files: |
+              ${{ steps.package.outputs.archive_name }}
+            generate_release_notes: true  # Auto-generate from commits
+            token: ${{ secrets.GITHUB_TOKEN }}
+
+        # ============================================
+        # STEP 16: Build Summary
+        # ============================================
+        - name: Build summary
+          shell: pwsh
+          run: |
+            Write-Host "`n==================================" -ForegroundColor Cyan
+            Write-Host "BUILD SUMMARY" -ForegroundColor Cyan
+            Write-Host "==================================" -ForegroundColor Cyan
+            Write-Host "Version: ${{ steps.version.outputs.version }}"
+            Write-Host "Archive: ${{ steps.package.outputs.archive_name }}"
+            Write-Host "Is Release: ${{ steps.version.outputs.is_release }}"
+            Write-Host "Is Pre-Release: ${{ steps.version.outputs.is_prerelease }}"
+            Write-Host "Commit: ${{ github.sha }}"
+            Write-Host "==================================`n" -ForegroundColor Cyan

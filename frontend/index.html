@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="SpartanHelmet.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>ARI.S</title>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <span class="logo-text">ARI.S</span>
+                    <div class="logo-subtext">Asset Reconfiguration and Integration System</div>
+                </div>
+            </div>
+            <div class="nav-items">
+                <div class="nav-item dashboard" data-pane="home">
+                    <div class="nav-icon">
+                        <svg id="layout-dashboard.svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" class="icon">
+                            <rect width="7" height="9" x="3" y="3" rx="1" />
+                            <rect width="7" height="5" x="14" y="3" rx="1" />
+                            <rect width="7" height="9" x="14" y="12" rx="1" />
+                            <rect width="7" height="5" x="3" y="16" rx="1" />
+                        </svg>
+                    </div>
+                    <span class="nav-text">Dashboard</span>
+                </div>
+                <div class="nav-item retoc" data-pane="retoc">
+                    <div class="nav-icon">
+                        <svg id="boxes.svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" class="icon">
+                            <path
+                                d="M2.97 12.92A2 2 0 0 0 2 14.63v3.24a2 2 0 0 0 .97 1.71l3 1.8a2 2 0 0 0 2.06 0L12 19v-5.5l-5-3-4.03 2.42Z" />
+                            <path d="m7 16.5-4.74-2.85" />
+                            <path d="m7 16.5 5-3" />
+                            <path d="M7 16.5v5.17" />
+                            <path
+                                d="M12 13.5V19l3.97 2.38a2 2 0 0 0 2.06 0l3-1.8a2 2 0 0 0 .97-1.71v-3.24a2 2 0 0 0-.97-1.71L17 10.5l-5 3Z" />
+                            <path d="m17 16.5-5-3" />
+                            <path d="m17 16.5 4.74-2.85" />
+                            <path d="M17 16.5v5.17" />
+                            <path
+                                d="M7.97 4.42A2 2 0 0 0 7 6.13v4.37l5 3 5-3V6.13a2 2 0 0 0-.97-1.71l-3-1.8a2 2 0 0 0-2.06 0l-3 1.8Z" />
+                            <path d="M12 8 7.26 5.15" />
+                            <path d="m12 8 4.74-2.85" />
+                            <path d="M12 13.5V8" />
+                        </svg>
+                    </div>
+                    <div class="nav-text-container">
+                        <span class="nav-text">Retoc</span>
+                        <span class="nav-subtext">Zen ⇌ Legacy</span>
+                    </div>
+                </div>
+                <div class="nav-item uasset" data-pane="uasset">
+                    <svg id="file-symlink.svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="icon">
+                        <path d="m10 18 3-3-3-3" />
+                        <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                        <path d="M4 11V4a2 2 0 0 1 2-2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h7" />
+                    </svg>
+                    <div class="nav-text-container">
+                        <span class="nav-text">UAssetAPI</span>
+                        <span class="nav-subtext">UAsset ⇌ JSON</span>
+                    </div>
+                </div>
+                <div class="nav-item injector" data-pane="injector">
+                    <svg id="syringe.svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="icon">
+                        <path d="m18 2 4 4" />
+                        <path d="m17 7 3-3" />
+                        <path d="M19 9 8.7 19.3c-1 1-2.5 1-3.4 0l-.6-.6c-1-1-1-2.5 0-3.4L15 5" />
+                        <path d="m9 11 4 4" />
+                        <path d="m5 19-3 3" />
+                        <path d="m14 4 6 6" />
+                    </svg>
+                    <div class="nav-text-container">
+                        <span class="nav-text">DLL Injector</span>
+                        <span class="nav-subtext">Process Injection</span>
+                    </div>
+                </div>
+                <div class="nav-item settings" data-pane="settings">
+                    <svg id="settings.svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="icon">
+                        <path
+                            d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
+                        <circle cx="12" cy="12" r="3" />
+                    </svg>
+                    <span class="nav-text">Settings</span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Home Pane -->
+            <div class="pane active" id="home-pane">
+                <div class="pane-header reveal-fade">
+                    <h1><span class="title-text">Asset Reconfiguration and Integration System</span></h1>
+                    <p>Developed by researchers at Ominent Technologies' Practical Applications Division,<br>the Asset
+                        Reconfiguration and Integration System (ARI.S) facilitates direct manipulation of simulation
+                        architecture.</p>
+                </div>
+                <div class="tile-grid">
+                    <div class="tile tile-retoc reveal-scale underglow-retoc" data-pane="retoc">
+                        <div class="tile-icon-retoc">
+                            <svg id="boxes.svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="icon icon-pack">
+                                <path
+                                    d="M2.97 12.92A2 2 0 0 0 2 14.63v3.24a2 2 0 0 0 .97 1.71l3 1.8a2 2 0 0 0 2.06 0L12 19v-5.5l-5-3-4.03 2.42Z" />
+                                <path d="m7 16.5-4.74-2.85" />
+                                <path d="m7 16.5 5-3" />
+                                <path d="M7 16.5v5.17" />
+                                <path
+                                    d="M12 13.5V19l3.97 2.38a2 2 0 0 0 2.06 0l3-1.8a2 2 0 0 0 .97-1.71v-3.24a2 2 0 0 0-.97-1.71L17 10.5l-5 3Z" />
+                                <path d="m17 16.5-5-3" />
+                                <path d="m17 16.5 4.74-2.85" />
+                                <path d="M17 16.5v5.17" />
+                                <path
+                                    d="M7.97 4.42A2 2 0 0 0 7 6.13v4.37l5 3 5-3V6.13a2 2 0 0 0-.97-1.71l-3-1.8a2 2 0 0 0-2.06 0l-3 1.8Z" />
+                                <path d="M12 8 7.26 5.15" />
+                                <path d="m12 8 4.74-2.85" />
+                                <path d="M12 13.5V8" />
+                            </svg>
+                        </div>
+                        <div class="tile-content">
+                            <h3>Zen ⇌ Legacy</h3>
+                            <span class="tile-consoletext">[SUBSYS-91.B] IOStore Container Manipulation Protocol</span>
+
+                            <div class="operation">
+                                <span class="op-label capsule capsule-retoc">[PACK]</span>
+                                <div class="op-desc">
+                                    Pack modified assets into finished mods
+                                    <div class="op-dir">(Legacy ⟶ Zen)</div>
+                                </div>
+                            </div>
+
+                            <div class="operation">
+                                <span class="op-label capsule capsule-retoc">[UNPACK]</span>
+                                <div class="op-desc">
+                                    Unpack game files into modifiable assets
+                                    <div class="op-dir">(Zen ⟶ Legacy)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="tile tile-uasset reveal-scale underglow-uasset" data-pane="uasset">
+                        <div class="tile-icon-uasset">
+                            <svg id="file-symlink.svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="icon">
+                                <path d="m10 18 3-3-3-3" />
+                                <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                                <path
+                                    d="M4 11V4a2 2 0 0 1 2-2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h7" />
+                            </svg>
+                        </div>
+                        <div class="tile-content">
+                            <h3>UAsset ⇌ JSON</h3>
+                            <span class="tile-consoletext">[SUBSYS-88.M] Simulation Asset Manipulation Protocol</span>
+                            <div class="operation">
+                                <span class="op-label capsule capsule-uasset">[EXPORT]</span>
+                                <div class="op-desc">
+                                    Convert extracted asset files to JSON
+                                    <div class="op-dir">(UAsset ⟶ JSON)</div>
+                                </div>
+                            </div>
+
+                            <div class="operation">
+                                <span class="op-label capsule capsule-uasset">[IMPORT]</span>
+                                <div class="op-desc">
+                                    Convert JSON files to UAsset
+                                    <div class="op-dir">(JSON ⟶ UAsset)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tile tile-injector reveal-scale underglow-injector" data-pane="injector">
+                        <div class="tile-icon-injector">
+                            <svg id="syringe.svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="icon">
+                                <path d="m18 2 4 4" />
+                                <path d="m17 7 3-3" />
+                                <path d="M19 9 8.7 19.3c-1 1-2.5 1-3.4 0l-.6-.6c-1-1-1-2.5 0-3.4L15 5" />
+                                <path d="m9 11 4 4" />
+                                <path d="m5 19-3 3" />
+                                <path d="m14 4 6 6" />
+                            </svg>
+                        </div>
+                        <div class="tile-content">
+                            <h3>DLL Injector</h3>
+                            <span class="tile-consoletext">[SUBSYS-77.K] Process Manipulation Interface</span>
+                            <div class="operation">
+                                <span class="op-label capsule capsule-injector">[INJECT]</span>
+                                <div class="op-desc">
+                                    Inject DLL into running process
+                                    <div class="op-dir">(Native Code Injection)</div>
+                                </div>
+                            </div>
+
+                            <div class="operation">
+                                <span class="op-label capsule capsule-injector">[EXTRACT]</span>
+                                <div class="op-desc">
+                                    Generate mappings and extract data
+                                    <div class="op-dir">(Runtime Analysis)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Retoc Manager Pane -->
+            <div class="pane" id="retoc-pane">
+                <div class="pane-header reveal-fade">
+                    <h1>Pack / Unpack</h1>
+                </div>
+                <div class="pane-content">
+                    <div class="form-section strip-settings retoc-form reveal-scale">
+                        <div class="operation-header">
+                            <svg id="settings-2.svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="icon icon-config">
+                                <path d="M14 17H5" />
+                                <path d="M19 7h-9" />
+                                <circle cx="17" cy="17" r="3" />
+                                <circle cx="7" cy="7" r="3" />
+                            </svg>
+                            <span class="op-label-text">Configuration</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ue-version">UE Version:</label>
+                            <select id="ue-version" class="form-select">
+                                <option value="UE5_4">UE 5.4</option>
+                                <option value="UE5_3">UE 5.3</option>
+                                <option value="UE5_2">UE 5.2</option>
+                                <option value="UE5_1">UE 5.1</option>
+                                <option value="UE5_0">UE 5.0</option>
+                                <option value="UE4_27">UE 4.27</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-section strip-red retoc-form reveal-scale">
+                        <div class="operation-header">
+                            <svg id="boxes.svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="icon icon-pack">
+                                <path
+                                    d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z" />
+                                <path d="M12 22V12" />
+                                <polyline points="3.29 7 12 12 20.71 7" />
+                                <path d="m7.5 4.27 9 5.15" />
+                            </svg>
+                            <span class="op-label-text">Pack</span>
+                            <span class="op-desc-inline">(Legacy ⟶ Zen)</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-mod-folder">
+                                <svg id="folder-input.svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="icon icon-input">
+                                    <path
+                                        d="M2 9V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-1" />
+                                    <path d="M2 13h10" />
+                                    <path d="m9 16 3-3-3-3" />
+                                </svg>
+                                Modified UAsset Directory:</label>
+                            <div class="input-group">
+                                <input type="text" id="input-mod-folder" class="form-input"
+                                    placeholder="C:\UAssets_Modified">
+                                <button class="button button-neutral" id="browse-input-mod">Browse</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pak-output-dir">
+                                <svg id="folder-output.svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="icon icon-output">
+                                    <path
+                                        d="M2 7.5V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-1.5" />
+                                    <path d="M2 13h10" />
+                                    <path d="m5 10-3 3 3 3" />
+                                </svg>
+                                Mod Output Directory:</label>
+                            <div class="input-group">
+                                <input type="text" id="pak-output-dir" class="form-input" placeholder="C:\AwesomeMod">
+                                <button class="button button-neutral" id="browse-pak-output">Browse</button>
+                            </div>
+                        </div>
+                        <div class="form-row pack-inline">
+                            <div class="form-group">
+                                <label for="mod-name">Mod Name:</label>
+                                <div class="input-wrap">
+                                    <input id="mod-name" type="text" class="form-input" placeholder="AwesomeMod">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="load-order">Load Order:</label>
+                                <div class="input-wrap">
+                                    <input id="load-order" type="text" class="form-input" placeholder="0001">
+                                </div>
+                            </div>
+
+                            <div class="input-wrap">
+                                <button id="run-retoc" class="button button-output">Build</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section strip-green retoc-form reveal-scale">
+                        <div class="operation-header">
+                            <svg id="package-open.svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="icon icon-unpack">
+                                <path d="M12 22v-9" />
+                                <path
+                                    d="M15.17 2.21a1.67 1.67 0 0 1 1.63 0L21 4.57a1.93 1.93 0 0 1 0 3.36L8.82 14.79a1.655 1.655 0 0 1-1.64 0L3 12.43a1.93 1.93 0 0 1 0-3.36z" />
+                                <path
+                                    d="M20 13v3.87a2.06 2.06 0 0 1-1.11 1.83l-6 3.08a1.93 1.93 0 0 1-1.78 0l-6-3.08A2.06 2.06 0 0 1 4 16.87V13" />
+                                <path
+                                    d="M21 12.43a1.93 1.93 0 0 0 0-3.36L8.83 2.2a1.64 1.64 0 0 0-1.63 0L3 4.57a1.93 1.93 0 0 0 0 3.36l12.18 6.86a1.636 1.636 0 0 0 1.63 0z" />
+                            </svg>
+                            <span class="op-label-text">Unpack</span>
+                            <span class="op-desc-inline">(Zen ⟶ Legacy)</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="game-paks-folder-unpak">
+                                <svg id="folder-input.svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="icon icon-input">
+                                    <path
+                                        d="M2 9V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-1" />
+                                    <path d="M2 13h10" />
+                                    <path d="m9 16 3-3-3-3" />
+                                </svg>
+                                Base Game File Directory (/paks):</label>
+                            <div class="input-group">
+                                <input type="text" id="game-paks-folder-unpak" class="form-input"
+                                    placeholder="C:\Program Files (x86)\Steam\steamapps\common\Grounded2\Augusta\Content\Paks">
+                                <button class="button button-neutral" id="browse-game-paks-unpak">Browse</button>
+                            </div>
+                            <div class="path-examples">
+                                <p>Steam: C:\Program Files (x86)\Steam\steamapps\common\Grounded2\Augusta\Content\Paks
+                                </p>
+                                <p>Xbox: C:\XboxGames\Grounded 2\Content\Augusta\Content\Paks</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="extract-output-dir">
+                                <svg id="folder-output.svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="icon icon-output">
+                                    <path
+                                        d="M2 7.5V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-1.5" />
+                                    <path d="M2 13h10" />
+                                    <path d="m5 10-3 3 3 3" />
+                                </svg>
+                                Extracted UAsset Output Directory:</label>
+                            <div class="input-group">
+                                <input type="text" id="extract-output-dir" class="form-input"
+                                    placeholder="C:\UAssets_Extracted">
+                                <button class="button button-neutral" id="browse-extract-output">Browse</button>
+                            </div>
+                        </div>
+                        <div class="form-row pack-inline">
+                            <div class="input-wrap">
+                                <button class="button button-input" id="run-unpak">Extract</button>
+                                <button class="button button-neutral" id="cancel-unpak"
+                                    style="display: none;">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="output-section strip-output reveal-scale">
+                        <div class="operation-header">
+                            <svg class="icon icon--md" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M3 15h18M3 9h18M9 3v18" />
+                            </svg>
+                            <span class="op-label-text">Console Log</span>
+                        </div>
+                        <div class="output-console" id="retoc-output">
+                            <div class="output-line">Idle.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UAsset Manager Pane -->
+            <div class="pane" id="uasset-pane">
+                <div class="pane-header reveal-fade">
+                    <h1>Asset Reconfiguration</h1>
+                    <p>
+                        Convert extracted asset files to JSON<br>
+                        Convert JSON files to UAsset</p>
+                </div>
+                <div class="pane-content">
+
+                    <div class="form-section strip-settings uasset-form reveal-scale">
+                        <div class="operation-header">
+                            <svg id="settings-2.svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="icon icon-config">
+                                <path d="M14 17H5" />
+                                <path d="M19 7h-9" />
+                                <circle cx="17" cy="17" r="3" />
+                                <circle cx="7" cy="7" r="3" />
+                            </svg>
+                            <span class="op-label-text">Configuration</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="uasset-mappings-path">
+                                <svg id="file-type.svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="icon">
+                                    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+                                    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                                    <path d="M9 13v-1h6v1" />
+                                    <path d="M12 12v6" />
+                                    <path d="M11 18h2" />
+                                </svg>
+                                Mappings File (.usmap):</label>
+                            <div class="input-group">
+                                <input type="text" id="uasset-mappings-path" class="form-input"
+                                    placeholder="Optional - required for modern UE games" readonly>
+                                <button class="button button-neutral" id="browse-uasset-mappings">Browse</button>
+                            </div>
+                            <div class="path-examples">
+                                <p style="font-size: 0.85em; color: var(--text-muted);">
+                                    Optional: Provides schema information for unversioned properties.
+                                    Without mappings, exports may be incomplete.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section strip-red uasset-form reveal-scale">
+                        <div class="operation-header">
+                            <svg id="file-output.svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="icon icon-export">
+                                <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                                <path d="M4 7V4a2 2 0 0 1 2-2 2 2 0 0 0-2 2" />
+                                <path d="M4.063 20.999a2 2 0 0 0 2 1L18 22a2 2 0 0 0 2-2V7l-5-5H6" />
+                                <path d="m5 11-3 3" />
+                                <path d="m5 17-3-3h10" />
+                            </svg>
+                            <span class="op-label-text">Export</span>
+                            <span class="op-desc-inline">(UAsset ⟶ JSON)</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="export-folder">
+                                <svg id="folder-output.svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="icon icon-output">
+                                    <path
+                                        d="M2 7.5V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-1.5" />
+                                    <path d="M2 13h10" />
+                                    <path d="m5 10-3 3 3 3" />
+                                </svg>
+                                UAsset Directory:</label>
+                            <div class="input-group">
+                                <input type="text" id="export-folder" class="form-input"
+                                    placeholder="C:\UAssets_Extracted">
+                                <button class="button button-neutral" id="browse-export-folder">Browse</button>
+                            </div>
+                        </div>
+                        <div class="file-count" id="export-file-count">
+                            <span class="file-count-label">Files found:</span>
+                            <span class="file-count-value">0 .uasset, 0 .uexp</span>
+                        </div>
+                        <div class="form-row pack-inline">
+                            <div class="input-wrap">
+                                <button class="button button-output" id="export-uassets">Export to JSON</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section strip-green uasset-form reveal-scale">
+                        <div class="operation-header">
+                            <svg id="file-input.svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="icon icon-import">
+                                <path d="M4 22h14a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v4" />
+                                <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                                <path d="M2 15h10" />
+                                <path d="m9 18 3-3-3-3" />
+                            </svg>
+                            <span class="op-label-text">Import</span>
+                            <span class="op-desc-inline">(JSON ⟶ UAsset)</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="import-folder">
+                                <svg id="folder-input.svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="icon icon-input">
+                                    <path
+                                        d="M2 9V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-1" />
+                                    <path d="M2 13h10" />
+                                    <path d="m9 16 3-3-3-3" />
+                                </svg>
+                                JSON Directory:</label>
+                            <div class="input-group">
+                                <input type="text" id="import-folder" class="form-input" placeholder="C:\UAssets_JSON">
+                                <button class="button button-neutral" id="browse-import-folder">Browse</button>
+                            </div>
+                        </div>
+                        <div class="file-count" id="import-file-count">
+                            <span class="file-count-label">Files found:</span>
+                            <span class="file-count-value">0 .json</span>
+                        </div>
+                        <div class="form-row pack-inline">
+                            <div class="input-wrap">
+                                <button class="button button-input" id="import-uassets">Import from JSON</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="output-section strip-output reveal-scale">
+                        <div class="operation-header">
+                            <svg class="icon icon--md" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M3 15h18M3 9h18M9 3v18" />
+                            </svg>
+                            <span class="op-label-text">Console Log</span>
+                        </div>
+                        <div class="output-console" id="uasset-output">
+                            <div class="output-line">Idle.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DLL Injector Pane -->
+            <div class="pane" id="injector-pane">
+                <div class="pane-header reveal-fade">
+                    <h1>Process Injection</h1>
+                    <p>
+                        Inject DLL into running processes for runtime analysis<br>
+                        Supports UnrealMappingsDumper, Dumper7, and custom DLLs</p>
+                </div>
+                <div class="pane-content">
+
+                    <div class="form-section strip-settings injector-form reveal-scale">
+                        <div class="operation-header">
+                            <svg id="settings-2.svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="icon icon-config">
+                                <path d="M14 17H5" />
+                                <path d="M19 7h-9" />
+                                <circle cx="17" cy="17" r="3" />
+                                <circle cx="7" cy="7" r="3" />
+                            </svg>
+                            <span class="op-label-text">Configuration</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dll-path">
+                                <svg id="file-code.svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="icon">
+                                    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+                                    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                                    <path d="m10 13-2 2 2 2" />
+                                    <path d="m14 17 2-2-2-2" />
+                                </svg>
+                                DLL File (.dll):</label>
+                            <div class="input-group">
+                                <input type="text" id="dll-path" class="form-input"
+                                    placeholder="C:\Path\To\UnrealMappingsDumper.dll" readonly>
+                                <button class="button button-neutral" id="browse-dll">Browse</button>
+                            </div>
+                            <div class="path-examples">
+                                <p style="font-size: 0.85em; color: var(--text-muted);">
+                                    Select a DLL to inject. Must be 64-bit for 64-bit processes.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section strip-red injector-form reveal-scale">
+                        <div class="operation-header">
+                            <svg id="syringe.svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="icon icon-inject">
+                                <path d="m18 2 4 4" />
+                                <path d="m17 7 3-3" />
+                                <path d="M19 9 8.7 19.3c-1 1-2.5 1-3.4 0l-.6-.6c-1-1-1-2.5 0-3.4L15 5" />
+                                <path d="m9 11 4 4" />
+                                <path d="m5 19-3 3" />
+                                <path d="m14 4 6 6" />
+                            </svg>
+                            <span class="op-label-text">Inject</span>
+                            <span class="op-desc-inline">(Target Process)</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="process-selector">
+                                <svg id="cpu.svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="icon icon-input">
+                                    <rect width="16" height="16" x="4" y="4" rx="2" />
+                                    <rect width="6" height="6" x="9" y="9" rx="1" />
+                                    <path d="M15 2v2" />
+                                    <path d="M15 20v2" />
+                                    <path d="M2 15h2" />
+                                    <path d="M2 9h2" />
+                                    <path d="M20 15h2" />
+                                    <path d="M20 9h2" />
+                                    <path d="M9 2v2" />
+                                    <path d="M9 20v2" />
+                                </svg>
+                                Target Process:</label>
+                            <div class="input-group">
+                                <select id="process-selector" class="form-select">
+                                    <option value="">-- Select a process --</option>
+                                </select>
+                                <button class="button button-neutral" id="refresh-processes">Refresh</button>
+                            </div>
+                            <div class="process-info" id="process-info" style="display: none;">
+                                <span class="file-count-label">Selected PID:</span>
+                                <span class="file-count-value" id="selected-pid">0</span>
+                            </div>
+                        </div>
+                        <div class="form-row pack-inline">
+                            <div class="input-wrap">
+                                <button class="button button-output" id="inject-dll">Inject DLL</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="output-section strip-output reveal-scale">
+                        <div class="operation-header">
+                            <svg class="icon icon--md" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M3 15h18M3 9h18M9 3v18" />
+                            </svg>
+                            <span class="op-label-text">Console Log</span>
+                        </div>
+                        <div class="output-console" id="injector-output">
+                            <div class="output-line">Idle.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Pane -->
+            <div class="pane" id="settings-pane">
+                <div class="pane-header reveal-fade">
+                    <h1>Configuration</h1>
+                    <p>Configure ARI.S Protocols</p>
+                </div>
+                <div class="pane-content">
+                    <div class="form-section strip-settings retoc-form reveal-scale">
+                        <h3>ARI.S Interface</h3>
+                        <div class="form-group">
+                            <label for="theme-select">Interface Appearance:</label>
+                            <select id="theme-select" class="form-select">
+                                <option value="dark">Correct</option>
+                                <option value="light">Incorrect</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="auto-save-settings">
+                                <span class="checkmark"></span>
+                                Auto-save
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button class="button button-neutral" id="save-settings">Deploy</button>
+                    </div>
+                </div>
+        </main>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+
+</body>
+
+</html>

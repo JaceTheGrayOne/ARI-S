@@ -1,0 +1,15 @@
+{
+	"fixed": {
+		"file_version": "0.1.0"
+	},
+	"info": {
+		"0000": {
+			"ProductVersion": "0.1.0",
+			"CompanyName": "Ominent Technologies",
+			"FileDescription": "Asset Reconfiguration and Integration System",
+			"LegalCopyright": "© 2025, Ominent Technologies' Practical Applications Division",
+			"ProductName": "ARI.S",
+			"Comments": "Modding toolkit for Unreal Engine asset manipulation"
+		}
+	}
+}
