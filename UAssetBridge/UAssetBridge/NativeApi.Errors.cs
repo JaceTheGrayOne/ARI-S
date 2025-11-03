@@ -11,7 +11,7 @@ namespace UAssetBridge
     public static class NativeErrors
     {
         [ThreadStatic]
-        private static string lastError;
+        private static string? lastError;
 
         /// <summary>
         /// Sets the last error message for the current thread.

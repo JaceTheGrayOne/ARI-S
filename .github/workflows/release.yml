@@ -104,47 +104,108 @@
             dotnet-version: '9.0.x'
 
         # ============================================
-        # STEP 7: Copy UAssetAPI.dll for Build
+        # STEP 7: Verify Dependencies Before Build
         # ============================================
-        - name: Copy UAssetAPI.dll to build location
+        - name: Verify required dependencies exist
           shell: pwsh
           run: |
-            Write-Host "Copying UAssetAPI.dll to UAssetBridge project..." -ForegroundColor Cyan
-            Copy-Item "dependencies/UAssetAPI/UAssetAPI.dll" "UAssetBridge/UAssetBridge/" -Force
-            Write-Host "UAssetAPI.dll copied successfully" -ForegroundColor Green
+            Write-Host "Verifying required dependencies..." -ForegroundColor Cyan
+
+            $missingFiles = @()
+
+            # Check UAssetAPI.dll (required for building UAssetBridge)
+            if (-not (Test-Path "UAssetBridge/UAssetBridge/UAssetAPI.dll")) {
+              $missingFiles += "UAssetBridge/UAssetBridge/UAssetAPI.dll"
+            } else {
+              $size = (Get-Item "UAssetBridge/UAssetBridge/UAssetAPI.dll").Length / 1MB
+              Write-Host "  ✓ UAssetAPI.dll: $([math]::Round($size, 2)) MB" -ForegroundColor Green
+            }
+
+            # Check retoc binaries (required for embedding)
+            if (-not (Test-Path "dependencies/retoc/retoc.exe")) {
+              $missingFiles += "dependencies/retoc/retoc.exe"
+            } else {
+              $size = (Get-Item "dependencies/retoc/retoc.exe").Length / 1MB
+              Write-Host "  ✓ retoc.exe: $([math]::Round($size, 2)) MB" -ForegroundColor Green
+            }
+
+            if (-not (Test-Path "dependencies/retoc/oo2core_9_win64.dll")) {
+              $missingFiles += "dependencies/retoc/oo2core_9_win64.dll"
+            } else {
+              $size = (Get-Item "dependencies/retoc/oo2core_9_win64.dll").Length / 1KB
+              Write-Host "  ✓ oo2core_9_win64.dll: $([math]::Round($size, 2)) KB" -ForegroundColor Green
+            }
+
+            # Check appicon.png (required for icon generation)
+            if (-not (Test-Path "build/appicon.png")) {
+              $missingFiles += "build/appicon.png"
+            } else {
+              $size = (Get-Item "build/appicon.png").Length / 1KB
+              Write-Host "  ✓ appicon.png: $([math]::Round($size, 2)) KB" -ForegroundColor Green
+            }
+
+            # Fail if any files are missing
+            if ($missingFiles.Count -gt 0) {
+              Write-Host "`n❌ ERROR: Required dependencies are missing from git:" -ForegroundColor Red
+              foreach ($file in $missingFiles) {
+                Write-Host "  - $file" -ForegroundColor Red
+              }
+              Write-Host "`nThese files must be committed to the repository." -ForegroundColor Yellow
+              Write-Host "Check .gitignore to ensure they are not being ignored." -ForegroundColor Yellow
+              exit 1
+            }
+
+            Write-Host "`n✓ All required dependencies verified" -ForegroundColor Green
 
         # ============================================
-        # STEP 8: Restore UAssetBridge Dependencies
+        # STEP 8: Build .NET UAssetBridge Component
         # ============================================
-        - name: Restore UAssetBridge NuGet packages
-          shell: pwsh
-          run: |
-            Write-Host "Restoring NuGet packages for UAssetBridge..." -ForegroundColor Cyan
-            dotnet restore UAssetBridge/UAssetBridge/UAssetBridge.csproj -r win-x64
-            Write-Host "NuGet packages restored successfully" -ForegroundColor Green
-
-        # ============================================
-        # STEP 9: Build .NET UAssetBridge Component
-        # ============================================
-        - name: Build UAssetBridge
+        - name: Build and publish UAssetBridge
           shell: pwsh
           run: |
             Write-Host "Building UAssetBridge (.NET component)..." -ForegroundColor Cyan
 
-            # Build the C# project
+            # Build the C# project as self-contained
             dotnet publish UAssetBridge/UAssetBridge/UAssetBridge.csproj `
               -c Release `
               -r win-x64 `
               --self-contained true `
               -p:PublishSingleFile=false `
               -p:DebugType=none `
-              -p:DebugSymbols=false `
-              --no-restore
+              -p:DebugSymbols=false
 
             Write-Host "UAssetBridge build complete" -ForegroundColor Green
 
+            # Copy published output to dependencies folder for embedding
+            Write-Host "Copying UAssetBridge output to dependencies/UAssetAPI/..." -ForegroundColor Cyan
+
+            # Ensure destination directory exists
+            New-Item -ItemType Directory -Path "dependencies/UAssetAPI" -Force | Out-Null
+
+            # Copy all published files
+            Copy-Item "UAssetBridge/UAssetBridge/bin/Release/net9.0/win-x64/publish/*" "dependencies/UAssetAPI/" -Recurse -Force
+
+            # Verify critical files were copied
+            if (Test-Path "dependencies/UAssetAPI/UAssetBridge.exe") {
+              Write-Host "✓ UAssetBridge.exe copied" -ForegroundColor Green
+            } else {
+              Write-Error "Failed to copy UAssetBridge.exe"
+              exit 1
+            }
+
+            if (Test-Path "dependencies/UAssetAPI/UAssetAPI.dll") {
+              Write-Host "✓ UAssetAPI.dll copied" -ForegroundColor Green
+            } else {
+              Write-Error "Failed to copy UAssetAPI.dll"
+              exit 1
+            }
+
+            # Count total files copied
+            $fileCount = (Get-ChildItem "dependencies/UAssetAPI" -File).Count
+            Write-Host "✓ Copied $fileCount files to dependencies/UAssetAPI/" -ForegroundColor Green
+
         # ============================================
-        # STEP 10: Extract Version from Tag or Commit
+        # STEP 9: Extract Version from Tag or Commit
         # ============================================
         - name: Extract version
           id: version
@@ -174,7 +235,7 @@
             }
 
         # ============================================
-        # STEP 11: Build Application with Wails
+        # STEP 10: Build Application with Wails
         # ============================================
         - name: Build ARI-S with Wails
           shell: pwsh
@@ -258,7 +319,7 @@
             }
 
         # ============================================
-        # STEP 12: Package Build Artifacts
+        # STEP 11: Package Build Artifacts
         # ============================================
         - name: Package release artifacts
           shell: pwsh
@@ -296,7 +357,7 @@
           id: package
 
         # ============================================
-        # STEP 13: Upload Build Artifact
+        # STEP 12: Upload Build Artifact
         # ============================================
         - name: Upload build artifact
           uses: actions/upload-artifact@v4
@@ -307,7 +368,7 @@
             if-no-files-found: error
 
         # ============================================
-        # STEP 14: Generate Release Notes
+        # STEP 13: Generate Release Notes
         # ============================================
         - name: Generate release notes
           if: steps.version.outputs.is_release == 'true'
@@ -381,7 +442,7 @@
             echo $NOTES >> $env:GITHUB_STEP_SUMMARY
 
         # ============================================
-        # STEP 15: Create GitHub Release
+        # STEP 14: Create GitHub Release
         # ============================================
         - name: Create GitHub Release
           if: steps.version.outputs.is_release == 'true'
@@ -398,7 +459,7 @@
             token: ${{ secrets.GITHUB_TOKEN }}
 
         # ============================================
-        # STEP 16: Build Summary
+        # STEP 15: Build Summary
         # ============================================
         - name: Build summary
           shell: pwsh

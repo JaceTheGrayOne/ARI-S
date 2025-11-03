@@ -25,7 +25,7 @@ namespace UAssetBridge
 
             string command = args[0].ToLower();
             string folderPath = args[1];
-            string mappingsPath = args.Length > 2 ? args[2] : null;
+            string? mappingsPath = args.Length > 2 ? args[2] : null;
 
             if (!Directory.Exists(folderPath))
             {
@@ -55,7 +55,7 @@ namespace UAssetBridge
             }
         }
 
-        static void ExportUAssets(string folderPath, string mappingsPath)
+        static void ExportUAssets(string folderPath, string? mappingsPath)
         {
             Console.WriteLine("=== UAssetBridge Export Starting ===");
             Console.WriteLine($"Received Asset Folder: {folderPath}");
@@ -63,7 +63,7 @@ namespace UAssetBridge
 
             // Step 1: Create Usmap object from the provided file path
             // This is the critical step - we must pass a Usmap OBJECT, not a string path
-            Usmap mappings = null;
+            Usmap? mappings = null;
             if (!string.IsNullOrEmpty(mappingsPath))
             {
                 if (!File.Exists(mappingsPath))
@@ -156,14 +156,14 @@ namespace UAssetBridge
             Console.WriteLine($"Failed: {failed} files");
         }
 
-        static void ImportUAssets(string folderPath, string mappingsPath = null)
+        static void ImportUAssets(string folderPath, string? mappingsPath = null)
         {
             Console.WriteLine("=== UAssetBridge Import Starting ===");
             Console.WriteLine($"Received JSON Folder: {folderPath}");
             Console.WriteLine($"Received Mappings Path: {(string.IsNullOrEmpty(mappingsPath) ? "None" : mappingsPath)}");
 
             // Load mappings if provided (needed for writing unversioned properties)
-            Usmap mappings = null;
+            Usmap? mappings = null;
             if (!string.IsNullOrEmpty(mappingsPath))
             {
                 if (!File.Exists(mappingsPath))

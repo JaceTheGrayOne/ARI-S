@@ -68,7 +68,7 @@ namespace UAssetBridge
                 }
 
                 // Marshal C string to managed string
-                string managedPath = Marshal.PtrToStringUTF8(path);
+                string? managedPath = Marshal.PtrToStringUTF8(path);
                 if (string.IsNullOrEmpty(managedPath))
                 {
                     NativeErrors.SetLastError("LoadMappings: path is empty");
@@ -142,7 +142,7 @@ namespace UAssetBridge
                 }
 
                 // Marshal path
-                string managedPath = Marshal.PtrToStringUTF8(path);
+                string? managedPath = Marshal.PtrToStringUTF8(path);
                 if (string.IsNullOrEmpty(managedPath))
                 {
                     NativeErrors.SetLastError("LoadAsset: path is empty");
@@ -156,7 +156,7 @@ namespace UAssetBridge
                 }
 
                 // Get mappings object if handle provided
-                Usmap mappings = null;
+                Usmap? mappings = null;
                 if (mappingsHandle != IntPtr.Zero)
                 {
                     try
@@ -229,7 +229,7 @@ namespace UAssetBridge
                 }
 
                 GCHandle handle = GCHandle.FromIntPtr(assetHandle);
-                UAsset asset = handle.Target as UAsset;
+                UAsset? asset = handle.Target as UAsset;
 
                 if (asset == null)
                 {
@@ -266,7 +266,7 @@ namespace UAssetBridge
                 }
 
                 GCHandle handle = GCHandle.FromIntPtr(assetHandle);
-                UAsset asset = handle.Target as UAsset;
+                UAsset? asset = handle.Target as UAsset;
 
                 if (asset == null)
                 {
@@ -310,7 +310,7 @@ namespace UAssetBridge
                     return IntPtr.Zero;
                 }
 
-                string managedJson = Marshal.PtrToStringUTF8(json);
+                string? managedJson = Marshal.PtrToStringUTF8(json);
                 if (string.IsNullOrEmpty(managedJson))
                 {
                     NativeErrors.SetLastError("DeserializeAssetFromJson: json is empty");
@@ -366,7 +366,7 @@ namespace UAssetBridge
 
                 // Get asset
                 GCHandle handle = GCHandle.FromIntPtr(assetHandle);
-                UAsset asset = handle.Target as UAsset;
+                UAsset? asset = handle.Target as UAsset;
 
                 if (asset == null)
                 {
@@ -375,7 +375,7 @@ namespace UAssetBridge
                 }
 
                 // Marshal path
-                string managedPath = Marshal.PtrToStringUTF8(path);
+                string? managedPath = Marshal.PtrToStringUTF8(path);
                 if (string.IsNullOrEmpty(managedPath))
                 {
                     NativeErrors.SetLastError("WriteAssetToFile: path is empty");
@@ -388,7 +388,7 @@ namespace UAssetBridge
                     try
                     {
                         GCHandle mappingsGCHandle = GCHandle.FromIntPtr(mappingsHandle);
-                        Usmap mappings = mappingsGCHandle.Target as Usmap;
+                        Usmap? mappings = mappingsGCHandle.Target as Usmap;
                         if (mappings != null)
                         {
                             asset.Mappings = mappings;
@@ -433,7 +433,7 @@ namespace UAssetBridge
                 }
 
                 GCHandle handle = GCHandle.FromIntPtr(assetHandle);
-                UAsset asset = handle.Target as UAsset;
+                UAsset? asset = handle.Target as UAsset;
 
                 if (asset == null)
                 {

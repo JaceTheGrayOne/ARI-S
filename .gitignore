@@ -8,10 +8,13 @@
 # Binaries for programs and plugins
 *.exe
 *.exe~
+!dependencies/retoc/*.exe           # Allow retoc.exe for embedding
 *.dll
-!dependencies/**/*.dll  # Allow DLLs in dependencies folder for CI/CD
-build/*.dll              # But exclude DLLs from build folder (these are artifacts)
-build/*.exe              # Exclude executables from build folder
+!dependencies/retoc/*.dll           # Allow retoc DLLs for embedding
+!dependencies/**/*.dll              # Allow DLLs in dependencies folder for CI/CD
+!UAssetBridge/UAssetBridge/UAssetAPI.dll  # Allow UAssetAPI.dll for building UAssetBridge
+build/*.dll                         # But exclude DLLs from build folder (these are artifacts)
+build/*.exe                         # Exclude executables from build folder
 *.so
 *.dylib
 *.zip
@@ -20,9 +23,9 @@ build/*.exe              # Exclude executables from build folder
 *.mp4
 *.wav
 *.png
-!build/**/*.png          # Allow PNG icons in build folder
-!build/**/*.ico          # Allow ICO icons in build folder
-!build/**/*.icns         # Allow ICNS icons in build folder
+!build/appicon.png                  # Allow appicon.png for icon generation
+!build/**/*.ico                     # Allow ICO icons in build folder
+!build/**/*.icns                    # Allow ICNS icons in build folder
 *.jpg
 *.jpeg
 *.bmp
