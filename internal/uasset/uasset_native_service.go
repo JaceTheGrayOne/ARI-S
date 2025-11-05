@@ -14,17 +14,19 @@ import (
 	"github.com/JaceTheGrayOne/ARI-S/internal/app"
 )
 
-// UAssetNativeService handles UAsset operations using the NativeAOT library via CGO.
-// This replaces the IPC-based UAssetService with direct in-process calls.
-type UAssetNativeService struct {
+// UAssetService handles UAsset operations using the NativeAOT library via CGO.
+// This replaces the IPC-based service with direct in-process calls via CGO.
+// When built with -tags cgo, this is the native implementation.
+type UAssetService struct {
 	app *app.App
 	api *NativeUAssetAPI
 }
 
-// NewUAssetNativeService creates a new UAssetNativeService.
+// NewUAssetService creates a new UAssetService using the NativeAOT CGO implementation.
 // This service uses CGO to call the NativeAOT UAssetBridge library directly.
-func NewUAssetNativeService(a *app.App) *UAssetNativeService {
-	return &UAssetNativeService{
+// The depsDir parameter is ignored in the CGO build.
+func NewUAssetService(a *app.App, depsDir string) *UAssetService {
+	return &UAssetService{
 		app: a,
 		api: NewNativeUAssetAPI(),
 	}
@@ -32,7 +34,7 @@ func NewUAssetNativeService(a *app.App) *UAssetNativeService {
 
 // ExportUAssets exports .uasset/.uexp files to JSON using the native library.
 // This method signature matches the IPC-based service for drop-in replacement.
-func (u *UAssetNativeService) ExportUAssets(ctx context.Context, folderPath, mappingsPath string) UAssetResult {
+func (u *UAssetService) ExportUAssets(ctx context.Context, folderPath, mappingsPath string) UAssetResult {
 	startTime := time.Now()
 
 	// Validate folder exists
@@ -178,7 +180,7 @@ func (u *UAssetNativeService) ExportUAssets(ctx context.Context, folderPath, map
 
 // ImportUAssets imports JSON files back to .uasset/.uexp using the native library.
 // This method signature matches the IPC-based service for drop-in replacement.
-func (u *UAssetNativeService) ImportUAssets(ctx context.Context, folderPath, mappingsPath string) UAssetResult {
+func (u *UAssetService) ImportUAssets(ctx context.Context, folderPath, mappingsPath string) UAssetResult {
 	startTime := time.Now()
 
 	// Validate folder exists
@@ -323,7 +325,7 @@ func (u *UAssetNativeService) ImportUAssets(ctx context.Context, folderPath, map
 
 // CountUAssetFiles counts .uasset and .uexp files in a directory.
 // This method signature matches the IPC-based service for drop-in replacement.
-func (u *UAssetNativeService) CountUAssetFiles(ctx context.Context, folderPath string) (int, int, error) {
+func (u *UAssetService) CountUAssetFiles(ctx context.Context, folderPath string) (int, int, error) {
 	if _, err := os.Stat(folderPath); os.IsNotExist(err) {
 		return 0, 0, fmt.Errorf("directory does not exist: %s", folderPath)
 	}
@@ -353,7 +355,7 @@ func (u *UAssetNativeService) CountUAssetFiles(ctx context.Context, folderPath s
 
 // CountJSONFiles counts .json files in a directory.
 // This method signature matches the IPC-based service for drop-in replacement.
-func (u *UAssetNativeService) CountJSONFiles(ctx context.Context, folderPath string) (int, error) {
+func (u *UAssetService) CountJSONFiles(ctx context.Context, folderPath string) (int, error) {
 	if _, err := os.Stat(folderPath); os.IsNotExist(err) {
 		return 0, fmt.Errorf("directory does not exist: %s", folderPath)
 	}

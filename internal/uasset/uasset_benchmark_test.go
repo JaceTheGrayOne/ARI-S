@@ -252,10 +252,16 @@ func findTestAssetForBench(b *testing.B) string {
 func findDepsDir(b *testing.B) string {
 	b.Helper()
 
-	// Look for extracted dependencies
+	// Look for extracted dependencies in multiple locations
 	candidates := []string{
 		filepath.Join(os.TempDir(), "aris_deps"),
 		"dependencies",
+	}
+
+	// Add appdata location (where dependencies are now extracted)
+	if configDir, err := os.UserConfigDir(); err == nil {
+		appDataDeps := filepath.Join(configDir, "ARI-S", "dependencies")
+		candidates = append([]string{appDataDeps}, candidates...) // Prepend appdata path
 	}
 
 	for _, path := range candidates {

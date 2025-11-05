@@ -8,6 +8,7 @@ import (
 	"github.com/JaceTheGrayOne/ARI-S/internal/injector"
 	"github.com/JaceTheGrayOne/ARI-S/internal/retoc"
 	"github.com/JaceTheGrayOne/ARI-S/internal/uasset"
+	"github.com/JaceTheGrayOne/ARI-S/internal/uwpdumper"
 	"github.com/wailsapp/wails/v3/pkg/application"
 )
 
@@ -60,9 +61,11 @@ func main() {
 	retocService := retoc.NewRetocService(appInstance, extractedDepsDir)
 	uassetService := uasset.NewUAssetService(appInstance, extractedDepsDir)
 	injectorService := injector.NewInjectorService(appInstance)
+	uwpDumperService := uwpdumper.NewUWPDumperService(appInstance, extractedDepsDir)
 	wailsApp.RegisterService(application.NewService(retocService))
 	wailsApp.RegisterService(application.NewService(uassetService))
 	wailsApp.RegisterService(application.NewService(injectorService))
+	wailsApp.RegisterService(application.NewService(uwpDumperService))
 
 	// Create a new window with the necessary options.
 	wailsApp.Window.NewWithOptions(application.WebviewWindowOptions{

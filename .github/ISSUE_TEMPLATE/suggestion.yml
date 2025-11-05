@@ -1,0 +1,18 @@
+name: Suggestion
+description: Suggest a new feature, improvement, or idea for ARI-S.
+title: "[Suggestion]: "
+labels: ["suggestion"]
+body:
+  - type: markdown
+    attributes:
+      value: "### Thanks for suggesting something for ARI-S! Please fill out the form below:"
+  - type: input
+    id: summary
+    attributes:
+      label: "Summary"
+      description: "Briefly describe your idea or suggestion."
+  - type: textarea
+    id: details
+    attributes:
+      label: "Details"
+      description: "Explain your idea, how it would help, and any context or examples."

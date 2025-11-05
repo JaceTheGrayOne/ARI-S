@@ -8,27 +8,30 @@ import { App } from "../bindings/github.com/JaceTheGrayOne/ARI-S/internal/app";
 import { RetocService, RetocOperation, RetocResult } from "../bindings/github.com/JaceTheGrayOne/ARI-S/internal/retoc";
 import { UAssetService, UAssetResult } from "../bindings/github.com/JaceTheGrayOne/ARI-S/internal/uasset";
 import { InjectorService } from "../bindings/github.com/JaceTheGrayOne/ARI-S/internal/injector";
+import { UWPDumperService } from "../bindings/github.com/JaceTheGrayOne/ARI-S/internal/uwpdumper";
 import { Events } from "@wailsio/runtime";
 
 // Application state
 let currentPane = 'home';
 
-// Track which output paths were explicitly set by user (not just loaded from config)
+// Track output paths
 let userSetOutputPaths = {
     pak_output_dir: false,
     extract_output_dir: false
 };
 
-// Track if settings have been loaded for the first time (to show console logs only on app launch)
+// Track settings
 let firstLoad = {
     retoc: true,
     uasset: true
 };
 
-// Initialize the application
+// Initialize application
 document.addEventListener('DOMContentLoaded', async function() {
 
-    // Test backend connection
+    localStorage.removeItem('aris-last-pane');
+
+    // Test backend
     console.log('Testing backend connection...');
     try {
         App.GetPreference('test').then(result => {
@@ -45,6 +48,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     initializeRetocManager();
     initializeUAssetManager();
     initializeInjectorManager();
+    initializeUWPDumperManager();
     initializeSettings();
     initializeDragAndDrop();
 
@@ -60,8 +64,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     });
 
-    // Load initial configuration from backend (loaded at app startup)
-    // This populates all fields at once before user interacts with UI
+    // Load initial config
     try {
         const initialConfig = await App.GetInitialConfig();
         await populateFieldsFromConfig(initialConfig);
@@ -72,17 +75,19 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // Load and apply theme settings
     loadSettings();
+
+    // Always start on the Dashboard
+    switchPane('home');
 });
 
-// Populate all form fields from the initial configuration
 async function populateFieldsFromConfig(config) {
-    // Retoc pane fields
+
     if (config.input_mod_folder) {
         document.getElementById('input-mod-folder').value = config.input_mod_folder;
     }
     if (config.pak_output_dir) {
         document.getElementById('pak-output-dir').value = config.pak_output_dir;
-        // Validate and mark as user-set if valid
+
         if (await App.ValidateDirectory(config.pak_output_dir)) {
             userSetOutputPaths.pak_output_dir = true;
         }
@@ -92,13 +97,13 @@ async function populateFieldsFromConfig(config) {
     }
     if (config.extract_output_dir) {
         document.getElementById('extract-output-dir').value = config.extract_output_dir;
-        // Validate and mark as user-set if valid
+
         if (await App.ValidateDirectory(config.extract_output_dir)) {
             userSetOutputPaths.extract_output_dir = true;
         }
     }
 
-    // UAsset pane fields
+
     if (config.export_folder) {
         document.getElementById('export-folder').value = config.export_folder;
         updateExportFileCount();
@@ -111,12 +116,12 @@ async function populateFieldsFromConfig(config) {
         document.getElementById('uasset-mappings-path').value = config.uasset_mappings_path;
     }
 
-    // Injector pane fields
+
     if (config.dll_path) {
         document.getElementById('dll-path').value = config.dll_path;
     }
 
-    // Settings
+
     if (config.ue_version) {
         document.getElementById('ue-version').value = config.ue_version;
     }
@@ -128,12 +133,12 @@ async function populateFieldsFromConfig(config) {
     }
 }
 
-// Navigation Management
+
 function initializeNavigation() {
     const navItems = document.querySelectorAll('.nav-item');
     const tiles = document.querySelectorAll('.tile');
     
-    // Handle sidebar navigation
+
     navItems.forEach(item => {
         item.addEventListener('click', () => {
             const pane = item.dataset.pane;
@@ -141,7 +146,7 @@ function initializeNavigation() {
         });
     });
     
-    // Handle tile navigation
+
     tiles.forEach(tile => {
         tile.addEventListener('click', () => {
             const pane = tile.dataset.pane;
@@ -150,27 +155,22 @@ function initializeNavigation() {
     });
 }
 
-// New helper for the staggered fade/slide reveals
 function animatePaneElements(pane) {
   const fadeEls = pane.querySelectorAll('.reveal-fade, .reveal-scale');
   fadeEls.forEach((el, i) => {
-    el.style.animationDelay = `${i * 0.10}s`; // slightly slower reveal for deeper elements
-    // Restart the animation each time we enter a pane
+    el.style.animationDelay = `${i * 0.10}s`;
     el.style.animation = 'none';
-    void el.offsetWidth; // force reflow to reset animation
+    void el.offsetWidth;
     el.style.animation = '';
   });
 }
 
-// Replace your old switchPane() with this new version
 function switchPane(paneName) {
-  // Update navigation
   document.querySelectorAll('.nav-item').forEach(item => {
     item.classList.remove('active');
   });
   document.querySelector(`[data-pane="${paneName}"]`)?.classList.add('active');
 
-  // Update panes
   document.querySelectorAll('.pane').forEach(pane => {
     pane.classList.remove('active');
   });
@@ -180,16 +180,16 @@ function switchPane(paneName) {
 
   currentPane = paneName;
 
-  // Load pane-specific data (keep your existing logic)
   if (paneName === 'retoc') {
     loadRetocSettings();
   } else if (paneName === 'uasset') {
     loadUAssetSettings();
   } else if (paneName === 'injector') {
     loadProcessList();
+  } else if (paneName === 'uwpdumper') {
+    loadUWPDumperInfo();
   }
 
-  // Trigger staggered element reveals after the pane becomes active
   animatePaneElements(next);
 }
 
@@ -217,10 +217,8 @@ function initializeRetocManager() {
 }
 
 async function loadRetocSettings() {
-    // Fields are already populated by populateFieldsFromConfig on app startup
-    // This function now only handles console logging on first pane visit
 
-    // Log loaded paths to console only on first visit to this pane
+    // Log loaded paths to console
     if (firstLoad.retoc) {
         const inputModFolder = document.getElementById('input-mod-folder').value;
         const pakOutputDir = document.getElementById('pak-output-dir').value;
@@ -255,7 +253,7 @@ async function runRetocToZen() {
         return;
     }
 
-    // Validate that output path was explicitly set by user
+    // Validate that output path set
     if (!userSetOutputPaths.pak_output_dir) {
         showOutput('retoc-output', 'Error: Please explicitly specify an output directory using the browse button or by typing a valid path.', 'error');
         return;
@@ -268,13 +266,13 @@ async function runRetocToZen() {
         return;
     }
 
-    // Validate serialization number (only digits 0-9)
+    // Validate serialization number
     if (orderSuffix && !/^\d+$/.test(orderSuffix)) {
         showOutput('retoc-output', 'Error: Serialization number must contain only digits 0-9.', 'error');
         return;
     }
 
-    // Validate mod name (no Windows invalid filename characters)
+    // Validate mod name
     // Invalid characters: < > : " / \ | ? *
     if (outputBaseName && /[<>:"/\\|?*]/.test(outputBaseName)) {
         showOutput('retoc-output', 'Error: Mod name contains invalid characters. Cannot use: < > : " / \\ | ? *', 'error');
@@ -288,16 +286,16 @@ async function runRetocToZen() {
 
     showOutput('retoc-output', 'Starting Retoc to-zen operation...', 'info');
 
-    // Build operation - output_path should be directory only for to-zen
+    // Build operation
     const operation = new RetocOperation({
         command: 'to-zen',
         input_path: inputPath,
-        output_path: outputPath,  // Directory only, not filename
+        output_path: outputPath,
         ue_version: ueVersion,
         options: []
     });
 
-    // Add mod name and serialization for file renaming (backend will use defaults if not provided)
+    // Add mod name and serialization
     if (outputBaseName) {
         operation.options.push('--mod-name', outputBaseName);
     }
@@ -331,7 +329,7 @@ async function runRetocUnpak() {
         return;
     }
 
-    // Validate that output path was explicitly set by user
+    // Validate that output path was set
     if (!userSetOutputPaths.extract_output_dir) {
         showOutput('retoc-output', 'Error: Please explicitly specify an output directory using the browse button or by typing a valid path.', 'error');
         return;
@@ -348,13 +346,12 @@ async function runRetocUnpak() {
     App.SetLastUsedPath('game_paks_folder_unpak', gamePaksFolder);
     App.SetLastUsedPath('extract_output_dir', extractOutputDir);
 
-    // Show cancel button, hide execute button
     document.getElementById('run-unpak').style.display = 'none';
     document.getElementById('cancel-unpak').style.display = 'inline-block';
 
     showOutput('retoc-output', 'Starting Retoc extraction operation (to-legacy)...', 'info');
 
-    // Build operation - use 'to-legacy' instead of 'unpack'
+    // Build operation
     const operation = new RetocOperation({
         command: 'to-legacy',
         input_path: gamePaksFolder,
@@ -362,11 +359,9 @@ async function runRetocUnpak() {
         options: []
     });
 
-    // Execute operation - since this is a blocking call, we can't get the operation ID
-    // until it completes. We'll use CancelCurrentOperation instead.
+    // Execute operation
     RetocService.RunRetoc(operation)
         .then(result => {
-            // Hide cancel button, show execute button
             document.getElementById('run-unpak').style.display = 'inline-block';
             document.getElementById('cancel-unpak').style.display = 'none';
 
@@ -387,7 +382,6 @@ async function runRetocUnpak() {
             }
         })
         .catch(error => {
-            // Hide cancel button, show execute button
             document.getElementById('run-unpak').style.display = 'inline-block';
             document.getElementById('cancel-unpak').style.display = 'none';
             currentOperationID = null;
@@ -399,7 +393,7 @@ async function runRetocUnpak() {
 function cancelRetocOperation() {
     showOutput('retoc-output', 'Cancelling operation...', 'warning');
 
-    // Cancel the to-legacy extraction operation specifically
+    // Cancel the to-legacy extraction operation
     RetocService.CancelOperationByCommand('to-legacy')
         .then(() => {
             showOutput('retoc-output', 'Cancellation requested', 'info');
@@ -409,7 +403,6 @@ function cancelRetocOperation() {
         });
 }
 
-// Preview functions removed as requested
 
 // UAsset Manager
 function initializeUAssetManager() {
@@ -428,10 +421,9 @@ function initializeUAssetManager() {
 }
 
 async function loadUAssetSettings() {
-    // Fields are already populated by populateFieldsFromConfig on app startup
-    // This function now only handles console logging on first pane visit
 
-    // Log loaded paths to console only on first visit to this pane
+    // Log loaded paths to console
+
     if (firstLoad.uasset) {
         const mappingsPath = document.getElementById('uasset-mappings-path').value;
         const exportFolder = document.getElementById('export-folder').value;
@@ -540,7 +532,6 @@ async function updateExportFileCount() {
     countElement.textContent = 'Counting files...';
 
     try {
-        // CountUAssetFiles returns [uassetCount, uexpCount] tuple
         const [uassetCount, uexpCount] = await UAssetService.CountUAssetFiles(folderPath);
         countElement.textContent = `${uassetCount} .uasset, ${uexpCount} .uexp`;
     } catch (error) {
@@ -561,7 +552,6 @@ async function updateImportFileCount() {
     countElement.textContent = 'Counting files...';
 
     try {
-        // CountJSONFiles returns a number, not an array
         const jsonCount = await UAssetService.CountJSONFiles(folderPath);
         countElement.textContent = `${jsonCount} .json`;
     } catch (error) {
@@ -572,7 +562,7 @@ async function updateImportFileCount() {
 
 // DLL Injector Manager
 function initializeInjectorManager() {
-    // Browse button for DLL file
+    // Browse button
     document.getElementById('browse-dll').addEventListener('click', () => browseDLL('dll-path'));
 
     // Refresh processes button
@@ -595,9 +585,6 @@ function initializeInjectorManager() {
 
     // Inject button
     document.getElementById('inject-dll').addEventListener('click', injectDLL);
-
-    // Load process list on pane activation
-    // This will be triggered when switching to injector pane
 }
 
 async function browseDLL(inputId) {
@@ -625,7 +612,7 @@ async function loadProcessList() {
         const processes = await InjectorService.GetRunningProcesses();
         const selector = document.getElementById('process-selector');
 
-        // Clear existing options except the first one
+        // Clear existing options
         selector.innerHTML = '<option value="">-- Select a process --</option>';
 
         // Sort processes by name
@@ -693,7 +680,6 @@ async function injectDLL() {
                 showOutput('injector-output', 'Your DLL path has been saved.', 'success');
                 showOutput('injector-output', 'After restart, simply click "Inject DLL" again.', 'info');
             } else {
-                // Regular error
                 showOutput('injector-output', `Injection failed: ${result.message}`, 'error');
                 if (result.error) {
                     showOutput('injector-output', `Error details: ${result.error}`, 'error');
@@ -710,6 +696,81 @@ async function injectDLL() {
         // Re-enable inject button
         injectButton.disabled = false;
         injectButton.textContent = 'Inject DLL';
+    }
+}
+
+// UWPDumper Manager
+function initializeUWPDumperManager() {
+    // Launch button
+    document.getElementById('launch-uwpdumper').addEventListener('click', launchUWPDumper);
+}
+
+async function loadUWPDumperInfo() {
+    showOutput('uwpdumper-output', 'Loading UWPDumper tool information...', 'info');
+
+    try {
+        // Get dumper info from backend
+        const info = await UWPDumperService.GetDumperInfo();
+
+        // Update launch button status
+        const launchButton = document.getElementById('launch-uwpdumper');
+
+        if (info.ready) {
+            launchButton.disabled = false;
+            showOutput('uwpdumper-output', 'UWPDumper tool is ready to use', 'success');
+            showOutput('uwpdumper-output', `Tool location: ${info.dumper_path}`, 'info');
+        } else {
+            launchButton.disabled = true;
+            showOutput('uwpdumper-output', 'UWPDumper tool not found', 'error');
+            showOutput('uwpdumper-output', 'Please download UWPDumper binaries and place them in:', 'info');
+            showOutput('uwpdumper-output', `  ${info.dumper_path.replace('UWPInjector.exe', '')}`, 'info');
+            showOutput('uwpdumper-output', 'See dependencies/uwpdumper/README.md for instructions', 'info');
+        }
+    } catch (error) {
+        console.error('Error loading UWPDumper info:', error);
+        showOutput('uwpdumper-output', `Error loading tool info: ${error.message}`, 'error');
+        const launchButton = document.getElementById('launch-uwpdumper');
+        if (launchButton) {
+            launchButton.disabled = true;
+        }
+    }
+}
+
+async function launchUWPDumper() {
+    showOutput('uwpdumper-output', 'Launching UWPDumper...', 'info');
+    showOutput('uwpdumper-output', '---', 'info');
+
+    // Disable launch button during operation
+    const launchButton = document.getElementById('launch-uwpdumper');
+    launchButton.disabled = true;
+    launchButton.textContent = 'Launching...';
+
+    try {
+        // Call the launch service
+        const result = await UWPDumperService.LaunchUWPDumper();
+
+        if (result.success) {
+            showOutput('uwpdumper-output', result.message, 'success');
+            showOutput('uwpdumper-output', '---', 'info');
+            showOutput('uwpdumper-output', result.output, 'info');
+            showOutput('uwpdumper-output', '---', 'info');
+            showOutput('uwpdumper-output', `Tool launched in: ${result.duration}`, 'info');
+        } else {
+            showOutput('uwpdumper-output', `Launch failed: ${result.message}`, 'error');
+            if (result.error) {
+                showOutput('uwpdumper-output', `Error details: ${result.error}`, 'error');
+            }
+            if (result.output) {
+                showOutput('uwpdumper-output', result.output, 'info');
+            }
+        }
+    } catch (error) {
+        showOutput('uwpdumper-output', `Launch error: ${error.message}`, 'error');
+        console.error('Launch failed:', error);
+    } finally {
+        // Re-enable launch button
+        launchButton.disabled = false;
+        launchButton.textContent = 'Launch UWPDumper';
     }
 }
 
@@ -763,26 +824,22 @@ function applyTheme(theme) {
 async function browseFolder(inputId) {
     try {
         const title = `Select folder for ${inputId.replace('-', ' ')}`;
-        const key = inputId.replace(/-/g, '_'); // Convert input-mod-folder to input_mod_folder
+        const key = inputId.replace(/-/g, '_');
 
-        // Pass the key so BrowseFolder can remember the last location for this specific field
         const result = await App.BrowseFolder(title, key);
         if (result) {
             document.getElementById(inputId).value = result;
 
-            // Mark output paths as user-set when browsed
             if (key === 'pak_output_dir' || key === 'extract_output_dir') {
                 userSetOutputPaths[key] = true;
             }
 
-            // Trigger file count updates for UAsset folders
             if (inputId === 'export-folder') {
                 updateExportFileCount();
             } else if (inputId === 'import-folder') {
                 updateImportFileCount();
             }
 
-            // Save the path for this specific field to remember location for next time
             await App.SetLastUsedPath(key, result);
         }
     } catch (error) {
@@ -793,16 +850,14 @@ async function browseFolder(inputId) {
 async function browseFile(inputId) {
     try {
         const title = `Select file for ${inputId.replace('-', ' ')}`;
-        const filter = "USMAP Files\x00*.usmap\x00All Files\x00*.*\x00\x00"; // Default filter
+        const filter = "USMAP Files\x00*.usmap\x00All Files\x00*.*\x00\x00";
 
-        // Convert input ID to config key (e.g., "uasset-mappings-path" -> "uasset_mappings_path")
         const key = inputId.replace(/-/g, '_');
 
         const result = await App.BrowseFile(title, filter, key);
         if (result) {
             document.getElementById(inputId).value = result;
 
-            // Save the selected path for next time
             await App.SetLastUsedPath(key, result);
         }
     } catch (error) {
@@ -820,12 +875,10 @@ function showOutput(containerId, message, type = 'info') {
 }
 
 function showNotification(message, type = 'info') {
-    // Create notification element
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
     notification.textContent = message;
     
-    // Style the notification
     notification.style.cssText = `
         position: fixed;
         top: 20px;
@@ -843,7 +896,6 @@ function showNotification(message, type = 'info') {
         word-wrap: break-word;
     `;
     
-    // Set background based on type
     switch (type) {
         case 'success':
             notification.style.background = 'var(--gradient-success)';
@@ -858,16 +910,13 @@ function showNotification(message, type = 'info') {
             notification.style.background = 'var(--gradient-accent)';
     }
     
-    // Add to page
     document.body.appendChild(notification);
     
-    // Animate in
     setTimeout(() => {
         notification.style.opacity = '1';
         notification.style.transform = 'translateX(0)';
     }, 10);
     
-    // Remove after 3 seconds
     setTimeout(() => {
         notification.style.opacity = '0';
         notification.style.transform = 'translateX(100%)';

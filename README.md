@@ -39,6 +39,12 @@ I plan to add more third-party and custom tools to ARI.S over time.
 - **Native Injection**: CreateRemoteThread-based DLL injection
 - **UAC Integration**: Automatic privilege elevation when needed
 
+### UWP Dumper
+- **UWP Package Extraction**: Dump encrypted files from Universal Windows Platform applications
+- **Game Pass Support**: Extract assets from Xbox Game Pass and Windows Store games
+- **Interactive Interface**: Launches UWPInjector tool in separate console window
+- **Automatic Output**: Dumps to `%LOCALAPPDATA%\Packages\<PFN>\TempState\DUMP`
+
 <br>
 
 ## Tech Stack
@@ -64,6 +70,7 @@ I plan to add more third-party and custom tools to ARI.S over time.
 ### External Tools
 [![Retoc](https://img.shields.io/badge/Retoc-8A2BE2?style=for-the-badge&logoColor=white)](https://github.com/WorkingRobot/Retoc)
 [![UAssetAPI](https://img.shields.io/badge/UAssetAPI-2E8B57?style=for-the-badge&logoColor=white)](https://github.com/atenfyr/UAssetAPI)
+[![UWPDumper](https://img.shields.io/badge/UWPDumper-FF6B6B?style=for-the-badge&logoColor=white)](https://github.com/Wunkolo/UWPDumper)
 
 </td>
 </tr>
@@ -242,6 +249,40 @@ z_modname_0001_p.pak
 
 <br>
 
+### UWP Dumper
+<details>
+<summary><b>Setup and Usage</b></summary>
+
+**First Time Setup**:
+1. Download UWPDumper from [GitHub Releases](https://github.com/Wunkolo/UWPDumper/releases)
+2. Extract `UWPInjector.exe` and `UWPDumper.dll` from the archive
+3. Place both files in: `dependencies/uwpdumper/`
+4. Restart ARI-S (or launch for first time)
+
+**Usage**:
+1. **Launch your target UWP app** (e.g., a Game Pass game)
+2. Select **"UWPDumper"** from the sidebar
+3. Verify tool status shows **"Ready"**
+4. Click **"Launch UWPDumper"**
+5. A console window will open prompting for the **Process ID (PID)**
+6. Find your app's PID in Task Manager (Details tab, enable PID column)
+7. Enter the PID in the console window and press Enter
+8. Files will be extracted automatically
+
+**Output Location**:
+```
+%LOCALAPPDATA%\Packages\<PackageFamilyName>\TempState\DUMP\
+```
+
+> **📝 Notes**:
+> - UWPDumper binaries are **not** included with ARI-S and must be downloaded separately
+> - The tool works with all UWP apps (Game Pass, Windows Store, etc.)
+> - Administrator privileges may be required for some applications
+> - Package Family Name (PFN) varies by application
+</details>
+
+<br>
+
 ## File Structure
 ```
 ARI-S/
@@ -251,9 +292,13 @@ ARI-S/
 │   ├── retoc/
 │   │   ├── retoc.exe           # IoStore Package Manager
 │   │   └── oo2core_9_win64.dll # Oodle Compression Library
-│   └── UAssetAPI/
-│       ├── UAssetBridge.exe    # UAssetAPI Language Agnostic Bridge
-│       └── [.NET runtime DLLs]
+│   ├── UAssetAPI/
+│   │   ├── UAssetBridge.exe    # UAssetAPI Language Agnostic Bridge
+│   │   └── [.NET runtime DLLs]
+│   └── uwpdumper/
+│       ├── UWPInjector.exe     # UWP Dumper Tool (User-provided)
+│       ├── UWPDumper.dll       # UWP Dumper DLL (User-provided)
+│       └── README.md           # Setup Instructions
 └── [User configuration]
     └── %LOCALAPPDATA%\ARI-S\
         └── config.json         # Saved Paths and Preferences

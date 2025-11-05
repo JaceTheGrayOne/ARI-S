@@ -1,8 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <!-- Original executable configuration (keep for backwards compat) -->
-    <OutputType>Exe</OutputType>
+    <!-- Conditional OutputType: Library for NativeAOT shared lib, Exe for standalone -->
+    <!-- When building with /p:NativeLib=Shared, this must be Library -->
+    <OutputType Condition="'$(NativeLib)' == 'Shared'">Library</OutputType>
+    <OutputType Condition="'$(NativeLib)' != 'Shared'">Exe</OutputType>
+
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>

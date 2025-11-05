@@ -1,3 +1,6 @@
+//go:build !cgo
+// +build !cgo
+
 package uasset
 
 import (
@@ -20,17 +23,6 @@ import (
 type UAssetService struct {
 	app     *app.App
 	depsDir string // Path to extracted dependencies
-}
-
-// UAssetResult contains the outcome of a UAsset export or import operation.
-// The FilesProcessed count is extracted from the bridge output if available.
-type UAssetResult struct {
-	Success        bool   `json:"success"`
-	Message        string `json:"message"`
-	Output         string `json:"output"`
-	Error          string `json:"error"`
-	Duration       string `json:"duration"`
-	FilesProcessed int    `json:"files_processed"`
 }
 
 // NewUAssetService creates a new UAssetService using the UAssetBridge.exe

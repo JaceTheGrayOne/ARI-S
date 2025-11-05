@@ -13,13 +13,11 @@ import (
 
 // EnsureDependencies extracts embedded dependencies on first run and returns the extraction path.
 // Automatically re-extracts if version.txt mismatches.
+// Dependencies are extracted to the user's AppData directory alongside config.json.
 func EnsureDependencies(depsFS embed.FS) (string, error) {
-	exePath, err := os.Executable()
-	if err != nil {
-		return "", fmt.Errorf("could not get executable path: %w", err)
-	}
-	appDir := filepath.Dir(exePath)
-	depsDir := filepath.Join(appDir, "dependencies")
+	// Use the same appdata directory as config
+	appDataDir := getAppDataDir()
+	depsDir := filepath.Join(appDataDir, "dependencies")
 
 	// Check version to determine if we need to extract/re-extract
 	versionPath := filepath.Join(depsDir, "version.txt")

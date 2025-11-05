@@ -7,6 +7,8 @@ package uasset
 #cgo CFLAGS: -I.
 #cgo LDFLAGS: -L. -lUAssetBridge
 
+#include <stdlib.h>
+
 // Forward declarations for exported C functions from UAssetBridge.dll
 extern char* GetVersion();
 extern void FreeString(void* ptr);
