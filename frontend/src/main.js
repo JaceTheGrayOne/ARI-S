@@ -1,9 +1,7 @@
-// ARI.S Frontend JavaScript
-
-// Import CSS for Vite HMR
+﻿// CSS
 import './style.css';
 
-// Import Wails bindings
+// Wails bindings
 import { App } from "../bindings/github.com/JaceTheGrayOne/ARI-S/internal/app";
 import { RetocService, RetocOperation, RetocResult } from "../bindings/github.com/JaceTheGrayOne/ARI-S/internal/retoc";
 import { UAssetService, UAssetResult } from "../bindings/github.com/JaceTheGrayOne/ARI-S/internal/uasset";
@@ -11,36 +9,57 @@ import { InjectorService } from "../bindings/github.com/JaceTheGrayOne/ARI-S/int
 import { UWPDumperService } from "../bindings/github.com/JaceTheGrayOne/ARI-S/internal/uwpdumper";
 import { Events } from "@wailsio/runtime";
 
-// Application state
+// App state
 let currentPane = 'home';
+let settingsCache = {
+    reduce_motion: false,
+    logs_clear_on_launch: true,
+    logs_max_lines: 0,
+    dir_mods: '',
+    dir_exports: '',
+    dir_imports: '',
+    usmap_path: '',
+    remember_paths: true,
+    proc_hide_system: false,
+    proc_sort: 'name'
+};
 
-// Track output paths
+// Cache of running processes for injector
+let processesCache = [];
+
+// Current Retoc operation id
+let currentOperationID = null;
+
 let userSetOutputPaths = {
     pak_output_dir: false,
     extract_output_dir: false
 };
 
-// Track settings
 let firstLoad = {
     retoc: true,
     uasset: true
 };
 
-// Initialize application
+// Initialize app
 document.addEventListener('DOMContentLoaded', async function() {
-
-    localStorage.removeItem('aris-last-pane');
-
-    // Test backend
-    console.log('Testing backend connection...');
     try {
-        App.GetPreference('test').then(result => {
-            console.log('Backend connection successful:', result);
-        }).catch(error => {
-            console.error('Backend connection failed:', error);
-        });
-    } catch (error) {
-        console.error('Backend service not available:', error);
+        const pref = await App.GetPreference('logs_clear_on_launch');
+        const shouldClear = (pref === null || pref === undefined) ? true : (String(pref) !== 'false');
+        if (shouldClear) {
+            const outputs = ['retoc-output','uasset-output','injector-output','uwpdumper-output'];
+            outputs.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.innerHTML = '';
+                    const idle = document.createElement('div');
+                    idle.className = 'output-line';
+                    idle.textContent = 'Idle.';
+                    el.appendChild(idle);
+                }
+            });
+        }
+    } catch(e) {
+        console.warn('Failed to init consoles on load:', e);
     }
 
     // Initialize UI
@@ -50,9 +69,15 @@ document.addEventListener('DOMContentLoaded', async function() {
     initializeInjectorManager();
     initializeUWPDumperManager();
     initializeSettings();
+    initializeMarkdownGuide();
+    await loadSettings();
     initializeDragAndDrop();
 
-    // Set up event listeners for retoc events
+    document.querySelectorAll('svg.icon').forEach(svg => {
+        svg.setAttribute('aria-hidden', 'true');
+        svg.setAttribute('focusable', 'false');
+    });
+
     Events.On("retoc:started", (data) => {
         currentOperationID = data.operation_id;
         console.log(`Operation started with ID: ${currentOperationID}`);
@@ -64,7 +89,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     });
 
-    // Load initial config
+    // Load config
     try {
         const initialConfig = await App.GetInitialConfig();
         await populateFieldsFromConfig(initialConfig);
@@ -73,10 +98,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         console.error('Failed to load initial configuration:', error);
     }
 
-    // Load and apply theme settings
-    loadSettings();
-
-    // Always start on the Dashboard
     switchPane('home');
 });
 
@@ -125,21 +146,33 @@ async function populateFieldsFromConfig(config) {
     if (config.ue_version) {
         document.getElementById('ue-version').value = config.ue_version;
     }
-    if (config.theme) {
-        document.getElementById('theme-select').value = config.theme;
-    }
-    if (config.auto_save) {
-        document.getElementById('auto-save-settings').checked = config.auto_save === 'true';
-    }
 }
 
 
 function initializeNavigation() {
     const navItems = document.querySelectorAll('.nav-item');
+    const navArray = Array.from(navItems);
     const tiles = document.querySelectorAll('.tile');
     
 
     navItems.forEach(item => {
+        item.setAttribute('role', 'button');
+        item.setAttribute('tabindex', '0');
+        item.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                item.click();
+                return;
+            }
+            if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                const i = navArray.indexOf(item);
+                if (i === -1) return;
+                const nextIndex = e.key === 'ArrowDown' ? Math.min(i + 1, navArray.length - 1) : Math.max(i - 1, 0);
+                navArray[nextIndex]?.focus();
+            }
+        });
+
         item.addEventListener('click', () => {
             const pane = item.dataset.pane;
             switchPane(pane);
@@ -148,6 +181,15 @@ function initializeNavigation() {
     
 
     tiles.forEach(tile => {
+        tile.setAttribute('role', 'button');
+        tile.setAttribute('tabindex', '0');
+        tile.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                tile.click();
+            }
+        });
+
         tile.addEventListener('click', () => {
             const pane = tile.dataset.pane;
             switchPane(pane);
@@ -202,7 +244,6 @@ function initializeRetocManager() {
     document.getElementById('browse-game-paks-unpak').addEventListener('click', () => browseFolder('game-paks-folder-unpak'));
     document.getElementById('browse-extract-output').addEventListener('click', () => browseFolder('extract-output-dir'));
 
-    // Mark output paths as user-set when manually typed/changed
     document.getElementById('pak-output-dir').addEventListener('input', () => {
         userSetOutputPaths.pak_output_dir = true;
     });
@@ -210,7 +251,6 @@ function initializeRetocManager() {
         userSetOutputPaths.extract_output_dir = true;
     });
 
-    // Action buttons
     document.getElementById('run-retoc').addEventListener('click', runRetocToZen);
     document.getElementById('run-unpak').addEventListener('click', runRetocUnpak);
     document.getElementById('cancel-unpak').addEventListener('click', cancelRetocOperation);
@@ -218,7 +258,6 @@ function initializeRetocManager() {
 
 async function loadRetocSettings() {
 
-    // Log loaded paths to console
     if (firstLoad.retoc) {
         const inputModFolder = document.getElementById('input-mod-folder').value;
         const pakOutputDir = document.getElementById('pak-output-dir').value;
@@ -239,6 +278,20 @@ async function loadRetocSettings() {
         }
         firstLoad.retoc = false;
     }
+
+    try {
+        if (!document.getElementById('pak-output-dir').value && settingsCache.dir_mods) {
+            document.getElementById('pak-output-dir').value = settingsCache.dir_mods;
+            userSetOutputPaths.pak_output_dir = true;
+        }
+        if (!document.getElementById('input-mod-folder').value && settingsCache.dir_mods) {
+            document.getElementById('input-mod-folder').value = settingsCache.dir_mods;
+        }
+        if (!document.getElementById('extract-output-dir').value && settingsCache.dir_imports) {
+            document.getElementById('extract-output-dir').value = settingsCache.dir_imports;
+            userSetOutputPaths.extract_output_dir = true;
+        }
+    } catch {}
 }
 
 async function runRetocToZen() {
@@ -279,7 +332,7 @@ async function runRetocToZen() {
         return;
     }
 
-    // Save paths to App service
+    // Save paths
     App.SetLastUsedPath('input_mod_folder', inputPath);
     App.SetLastUsedPath('pak_output_dir', outputPath);
     App.SetPreference('ue_version', ueVersion);
@@ -342,7 +395,7 @@ async function runRetocUnpak() {
         return;
     }
 
-    // Save paths to App service
+    // Save paths to App
     App.SetLastUsedPath('game_paks_folder_unpak', gamePaksFolder);
     App.SetLastUsedPath('extract_output_dir', extractOutputDir);
 
@@ -350,6 +403,7 @@ async function runRetocUnpak() {
     document.getElementById('cancel-unpak').style.display = 'inline-block';
 
     showOutput('retoc-output', 'Starting Retoc extraction operation (to-legacy)...', 'info');
+    showOutput('retoc-output', 'This is working, the blank cmd shell is normal.', 'info');
 
     // Build operation
     const operation = new RetocOperation({
@@ -393,7 +447,7 @@ async function runRetocUnpak() {
 function cancelRetocOperation() {
     showOutput('retoc-output', 'Cancelling operation...', 'warning');
 
-    // Cancel the to-legacy extraction operation
+    // Cancel to-legacy extraction operation
     RetocService.CancelOperationByCommand('to-legacy')
         .then(() => {
             showOutput('retoc-output', 'Cancellation requested', 'info');
@@ -422,8 +476,6 @@ function initializeUAssetManager() {
 
 async function loadUAssetSettings() {
 
-    // Log loaded paths to console
-
     if (firstLoad.uasset) {
         const mappingsPath = document.getElementById('uasset-mappings-path').value;
         const exportFolder = document.getElementById('export-folder').value;
@@ -440,6 +492,20 @@ async function loadUAssetSettings() {
         }
         firstLoad.uasset = false;
     }
+
+    try {
+        if (!document.getElementById('export-folder').value && settingsCache.dir_exports) {
+            document.getElementById('export-folder').value = settingsCache.dir_exports;
+            updateExportFileCount();
+        }
+        if (!document.getElementById('import-folder').value && settingsCache.dir_imports) {
+            document.getElementById('import-folder').value = settingsCache.dir_imports;
+            updateImportFileCount();
+        }
+        if (!document.getElementById('uasset-mappings-path').value && settingsCache.usmap_path) {
+            document.getElementById('uasset-mappings-path').value = settingsCache.usmap_path;
+        }
+    } catch {}
 }
 
 function exportUAssets() {
@@ -451,7 +517,7 @@ function exportUAssets() {
         return;
     }
 
-    // Save paths to App service
+    // Save paths to App
     App.SetLastUsedPath('export_folder', folderPath);
     if (mappingsPath) {
         App.SetLastUsedPath('uasset_mappings_path', mappingsPath);
@@ -490,7 +556,7 @@ function importUAssets() {
         return;
     }
 
-    // Save paths to App service
+    // Save paths to App
     App.SetLastUsedPath('import_folder', folderPath);
     if (mappingsPath) {
         App.SetLastUsedPath('uasset_mappings_path', mappingsPath);
@@ -565,26 +631,36 @@ function initializeInjectorManager() {
     // Browse button
     document.getElementById('browse-dll').addEventListener('click', () => browseDLL('dll-path'));
 
-    // Refresh processes button
+    // Refresh button
     document.getElementById('refresh-processes').addEventListener('click', loadProcessList);
 
-    // Process selector change handler
-    document.getElementById('process-selector').addEventListener('change', () => {
-        const selector = document.getElementById('process-selector');
+    // Process selector
+    document.getElementById('process-selector').addEventListener('change', (e) => {
+        const selector = e.target;
         const processInfo = document.getElementById('process-info');
         const selectedPidElement = document.getElementById('selected-pid');
 
         if (selector.value) {
-            const pid = selector.value;
-            selectedPidElement.textContent = pid;
+            selectedPidElement.textContent = selector.value;
             processInfo.style.display = 'block';
         } else {
             processInfo.style.display = 'none';
         }
     });
 
+    // Process filter
+    document.getElementById('process-filter').addEventListener('input', () => {
+        applyProcessFilter();
+    });
+
     // Inject button
     document.getElementById('inject-dll').addEventListener('click', injectDLL);
+
+    // Dump SDK button
+    document.getElementById('dump-sdk').addEventListener('click', dumpSDK);
+
+    // Dump Mappings button
+    document.getElementById('dump-mappings').addEventListener('click', dumpMappings);
 }
 
 async function browseDLL(inputId) {
@@ -596,7 +672,9 @@ async function browseDLL(inputId) {
         const result = await App.BrowseFile(title, filter, key);
         if (result) {
             document.getElementById(inputId).value = result;
-            await App.SetLastUsedPath(key, result);
+            if (settingsCache.remember_paths) {
+                await App.SetLastUsedPath(key, result);
+            }
             showOutput('injector-output', `DLL selected: ${result}`, 'info');
         }
     } catch (error) {
@@ -609,21 +687,41 @@ async function loadProcessList() {
     showOutput('injector-output', 'Loading running processes...', 'info');
 
     try {
-        const processes = await InjectorService.GetRunningProcesses();
+        let processes = await InjectorService.GetRunningProcesses();
         const selector = document.getElementById('process-selector');
+        const filterInput = document.getElementById('process-filter');
+
+        // Clear filter
+        if (filterInput) {
+            filterInput.value = '';
+        }
 
         // Clear existing options
         selector.innerHTML = '<option value="">-- Select a process --</option>';
 
-        // Sort processes by name
-        processes.sort((a, b) => a.name.localeCompare(b.name));
+        if (settingsCache.proc_hide_system) {
+            const name = (s)=>String(s||'').toLowerCase();
+            const blacklistExact = new Set(['system','idle','registry','smss.exe','csrss.exe','wininit.exe','services.exe','lsass.exe','winlogon.exe','fontdrvhost.exe','conhost.exe','spoolsv.exe','dwm.exe','sihost.exe','ctfmon.exe','securityhealthservice.exe']);
+            const patterns = [/^svchost\.exe$/i,/host\.exe$/i,/broker/i,/search/i,/experiencehost/i,/runtimebroker/i,/startmenuexperiencehost/i,/shellexperiencehost/i,/textinputhost/i,/systemsettings/i,/snippingtool/i];
+            processes = processes.filter(p => {
+                const n = name(p.name);
+                if (blacklistExact.has(n)) return false;
+                return !patterns.some(rx => rx.test(n));
+            });
+        }
+        if (settingsCache.proc_sort === 'pid') {
+            processes.sort((a, b) => (a.pid - b.pid));
+        } else {
+            processes.sort((a, b) => String(a.name).localeCompare(String(b.name)));
+        }
 
-        // Add process options
-        processes.forEach(proc => {
-            const option = document.createElement('option');
-            option.value = proc.pid;
-            option.textContent = `${proc.name} (PID: ${proc.pid})`;
-            selector.appendChild(option);
+        processesCache = processes;
+        selector.innerHTML = '<option value="">-- Select a process --</option>';
+        processesCache.forEach(p => {
+            const opt = document.createElement('option');
+            opt.value = String(p.pid);
+            opt.textContent = `${String(p.name || 'Unknown')} (PID: ${p.pid})`;
+            selector.appendChild(opt);
         });
 
         showOutput('injector-output', `Loaded ${processes.length} running processes`, 'success');
@@ -633,6 +731,21 @@ async function loadProcessList() {
     }
 }
 
+
+
+function applyProcessFilter() {
+    const selector = document.getElementById('process-selector');
+    const needle = (document.getElementById('process-filter')?.value || '').toLowerCase();
+    selector.innerHTML = '<option value="">-- Select a process --</option>';
+    processesCache.forEach(p => {
+        const label = `${String(p.name || 'Unknown')} (PID: ${p.pid})`;
+        if (needle && !label.toLowerCase().includes(needle)) return;
+        const opt = document.createElement('option');
+        opt.value = String(p.pid);
+        opt.textContent = label;
+        selector.appendChild(opt);
+    });
+}
 async function injectDLL() {
     const dllPath = document.getElementById('dll-path').value;
     const selector = document.getElementById('process-selector');
@@ -671,9 +784,8 @@ async function injectDLL() {
             showOutput('injector-output', result.output, 'info');
             showOutput('injector-output', `Duration: ${result.duration}`, 'info');
         } else {
-            // Check if this is an elevation request
             if (result.error === 'NEEDS_ELEVATION') {
-                showOutput('injector-output', '⚠️ ADMINISTRATOR PRIVILEGES REQUIRED', 'info');
+                showOutput('injector-output', 'âš ï¸ ADMINISTRATOR PRIVILEGES REQUIRED', 'info');
                 showOutput('injector-output', '---', 'info');
                 showOutput('injector-output', result.output, 'info');
                 showOutput('injector-output', '---', 'info');
@@ -693,9 +805,154 @@ async function injectDLL() {
         showOutput('injector-output', `Injection error: ${error.message}`, 'error');
         console.error('Injection failed:', error);
     } finally {
-        // Re-enable inject button
         injectButton.disabled = false;
         injectButton.textContent = 'Inject DLL';
+    }
+}
+
+async function dumpSDK() {
+    const selector = document.getElementById('process-selector');
+    const selectedPID = selector.value;
+
+    // Validation
+    if (!selectedPID) {
+        showOutput('injector-output', 'Error: Please select a target process first.', 'error');
+        return;
+    }
+
+    // Get process name for display
+    const selectedOption = selector.options[selector.selectedIndex];
+    const processName = selectedOption.textContent;
+
+    // Get Dumper7.dll
+    let dumper7Path;
+    try {
+        dumper7Path = await App.GetDumper7Path();
+        if (!dumper7Path) {
+            showOutput('injector-output', 'Error: Could not locate Dumper7.dll in dependencies directory.', 'error');
+            return;
+        }
+    } catch (error) {
+        showOutput('injector-output', `Error getting Dumper7 path: ${error.message}`, 'error');
+        return;
+    }
+
+    showOutput('injector-output', `Attempting to inject Dumper7 SDK dumper`, 'info');
+    showOutput('injector-output', `DLL: ${dumper7Path}`, 'info');
+    showOutput('injector-output', `Target: ${processName}`, 'info');
+    showOutput('injector-output', '---', 'info');
+
+    // Disable dump button during operation
+    const dumpButton = document.getElementById('dump-sdk');
+    dumpButton.disabled = true;
+    dumpButton.textContent = 'Dumping...';
+
+    try {
+        // Call the injection service with Dumper7.dll
+        const result = await InjectorService.InjectDLL(parseInt(selectedPID), dumper7Path);
+
+        if (result.success) {
+            showOutput('injector-output', result.message, 'success');
+            showOutput('injector-output', result.output, 'info');
+            showOutput('injector-output', `Duration: ${result.duration}`, 'info');
+            showOutput('injector-output', '---', 'info');
+            showOutput('injector-output', 'SDK dump initiated. Check the game directory for output files.', 'success');
+        } else {
+            if (result.error === 'NEEDS_ELEVATION') {
+                showOutput('injector-output', 'âš ï¸ ADMINISTRATOR PRIVILEGES REQUIRED', 'info');
+                showOutput('injector-output', '---', 'info');
+                showOutput('injector-output', result.output, 'info');
+                showOutput('injector-output', '---', 'info');
+                showOutput('injector-output', 'Please restart the application as Administrator and try again.', 'info');
+            } else {
+                showOutput('injector-output', `SDK dump failed: ${result.message}`, 'error');
+                if (result.error) {
+                    showOutput('injector-output', `Error details: ${result.error}`, 'error');
+                }
+                if (result.output) {
+                    showOutput('injector-output', result.output, 'error');
+                }
+            }
+        }
+    } catch (error) {
+        showOutput('injector-output', `SDK dump error: ${error.message}`, 'error');
+        console.error('SDK dump failed:', error);
+    } finally {
+        dumpButton.disabled = false;
+        dumpButton.textContent = 'Dump SDK';
+    }
+}
+
+async function dumpMappings() {
+    const selector = document.getElementById('process-selector');
+    const selectedPID = selector.value;
+
+    // Validation
+    if (!selectedPID) {
+        showOutput('injector-output', 'Error: Please select a target process first.', 'error');
+        return;
+    }
+
+    // Get process name for display
+    const selectedOption = selector.options[selector.selectedIndex];
+    const processName = selectedOption.textContent;
+
+    // Get UnrealMappingsDumper.dll
+    let mappingsDumperPath;
+    try {
+        mappingsDumperPath = await App.GetUnrealMappingsDumperPath();
+        if (!mappingsDumperPath) {
+            showOutput('injector-output', 'Error: Could not locate UnrealMappingsDumper.dll in dependencies directory.', 'error');
+            return;
+        }
+    } catch (error) {
+        showOutput('injector-output', `Error getting UnrealMappingsDumper path: ${error.message}`, 'error');
+        return;
+    }
+
+    showOutput('injector-output', `Attempting to inject UnrealMappingsDumper`, 'info');
+    showOutput('injector-output', `DLL: ${mappingsDumperPath}`, 'info');
+    showOutput('injector-output', `Target: ${processName}`, 'info');
+    showOutput('injector-output', '---', 'info');
+
+    // Disable dump button during operation
+    const dumpButton = document.getElementById('dump-mappings');
+    dumpButton.disabled = true;
+    dumpButton.textContent = 'Dumping...';
+
+    try {
+        // Call the injection service with UnrealMappingsDumper.dll
+        const result = await InjectorService.InjectDLL(parseInt(selectedPID), mappingsDumperPath);
+
+        if (result.success) {
+            showOutput('injector-output', result.message, 'success');
+            showOutput('injector-output', result.output, 'info');
+            showOutput('injector-output', `Duration: ${result.duration}`, 'info');
+            showOutput('injector-output', '---', 'info');
+            showOutput('injector-output', 'Mappings dump initiated. Check the game directory for .usmap output file.', 'success');
+        } else {
+            if (result.error === 'NEEDS_ELEVATION') {
+                showOutput('injector-output', 'âš ï¸ ADMINISTRATOR PRIVILEGES REQUIRED', 'info');
+                showOutput('injector-output', '---', 'info');
+                showOutput('injector-output', result.output, 'info');
+                showOutput('injector-output', '---', 'info');
+                showOutput('injector-output', 'Please restart the application as Administrator and try again.', 'info');
+            } else {
+                showOutput('injector-output', `Mappings dump failed: ${result.message}`, 'error');
+                if (result.error) {
+                    showOutput('injector-output', `Error details: ${result.error}`, 'error');
+                }
+                if (result.output) {
+                    showOutput('injector-output', result.output, 'error');
+                }
+            }
+        }
+    } catch (error) {
+        showOutput('injector-output', `Mappings dump error: ${error.message}`, 'error');
+        console.error('Mappings dump failed:', error);
+    } finally {
+        dumpButton.disabled = false;
+        dumpButton.textContent = 'Dump Mappings';
     }
 }
 
@@ -712,7 +969,7 @@ async function loadUWPDumperInfo() {
         // Get dumper info from backend
         const info = await UWPDumperService.GetDumperInfo();
 
-        // Update launch button status
+        // Update launch button
         const launchButton = document.getElementById('launch-uwpdumper');
 
         if (info.ready) {
@@ -776,51 +1033,141 @@ async function launchUWPDumper() {
 
 // Settings
 function initializeSettings() {
-    document.getElementById('save-settings').addEventListener('click', saveSettings);
-    document.getElementById('theme-select').addEventListener('change', (e) => {
-        applyTheme(e.target.value);
+  document.getElementById('save-settings').addEventListener('click', saveSettings);
+  const exp = document.getElementById('pref-export');
+  const imp = document.getElementById('pref-import');
+  const file = document.getElementById('pref-import-file');
+  const reset = document.getElementById('pref-reset');
+  if (exp) exp.addEventListener('click', exportSettings);
+  if (imp && file) imp.addEventListener('click', () => file.click());
+  if (file) file.addEventListener('change', importSettingsFromFile);
+  if (reset) reset.addEventListener('click', async () => { await resetDefaults(); await loadSettings(); showNotification('Settings reset to defaults', 'success'); });
+
+  // Browse buttons
+  const pairs = [
+    ['browse-pref-dir-mods', 'pref-dir-mods', 'folder'],
+    ['browse-pref-dir-exports', 'pref-dir-exports', 'folder'],
+    ['browse-pref-dir-imports', 'pref-dir-imports', 'folder'],
+    ['browse-pref-usmap-path', 'pref-usmap-path', 'file']
+  ];
+  pairs.forEach(([btnId, inputId, kind]) => {
+    const btn = document.getElementById(btnId);
+    if (!btn) return;
+    btn.addEventListener('click', async () => {
+      if (kind === 'folder') {
+        await browseFolder(inputId);
+      } else {
+        await browseFile(inputId);
+      }
     });
+  });
 }
 
 async function loadSettings() {
-    const theme = await App.GetPreference('theme') || 'dark';
-    const autoSave = await App.GetPreference('auto_save') === 'true';
-    
-    document.getElementById('theme-select').value = theme;
-    document.getElementById('auto-save-settings').checked = autoSave;
-    
-    // Apply the loaded theme
-    applyTheme(theme);
+  const entries = [
+    ['reduce_motion','false'],
+    ['logs_clear_on_launch','true'],
+    ['logs_max_lines','0'],
+    ['dir_mods',''],
+    ['dir_exports',''],
+    ['dir_imports',''],
+    ['usmap_path',''],
+    ['remember_paths','true'],
+    ['proc_hide_system','false'],
+    ['proc_sort','name']
+  ];
+  for (const [key, def] of entries) {
+    try { const v = await App.GetPreference(key); settingsCache[key] = (v ?? def); } catch {}
+  }
+
+  settingsCache.reduce_motion = settingsCache.reduce_motion === 'true' || settingsCache.reduce_motion === true;
+  settingsCache.logs_clear_on_launch = settingsCache.logs_clear_on_launch === 'true' || settingsCache.logs_clear_on_launch === true;
+  settingsCache.logs_max_lines = parseInt(settingsCache.logs_max_lines || '0', 10) || 0;
+  settingsCache.remember_paths = settingsCache.remember_paths === 'true' || settingsCache.remember_paths === true;
+  settingsCache.proc_hide_system = settingsCache.proc_hide_system === 'true' || settingsCache.proc_hide_system === true;
+
+  // UI
+  const byId = (id) => document.getElementById(id);
+  byId('pref-reduce-motion').checked = settingsCache.reduce_motion;
+  byId('pref-logs-clear').checked = settingsCache.logs_clear_on_launch;
+  byId('pref-logs-max').value = settingsCache.logs_max_lines;
+  byId('pref-dir-mods').value = settingsCache.dir_mods;
+  byId('pref-dir-exports').value = settingsCache.dir_exports;
+  byId('pref-dir-imports').value = settingsCache.dir_imports;
+  byId('pref-usmap-path').value = settingsCache.usmap_path;
+  byId('pref-remember-paths').checked = settingsCache.remember_paths;
+  byId('pref-proc-hide-system').checked = settingsCache.proc_hide_system;
+  byId('pref-proc-sort').value = settingsCache.proc_sort;
+
+  document.body.classList.toggle('reduce-motion', settingsCache.reduce_motion);
 }
 
-function saveSettings() {
-    const theme = document.getElementById('theme-select').value;
-    const autoSave = document.getElementById('auto-save-settings').checked;
-    
-    App.SetPreference('theme', theme);
-    App.SetPreference('auto_save', autoSave.toString());
-    
-    showNotification('Settings saved successfully!', 'success');
+async function saveSettings() {
+  const byId = (id) => document.getElementById(id);
+  settingsCache.reduce_motion = byId('pref-reduce-motion').checked;
+  settingsCache.logs_clear_on_launch = byId('pref-logs-clear').checked;
+  settingsCache.logs_max_lines = parseInt(byId('pref-logs-max').value || '0', 10) || 0;
+  settingsCache.dir_mods = byId('pref-dir-mods').value.trim();
+  settingsCache.dir_exports = byId('pref-dir-exports').value.trim();
+  settingsCache.dir_imports = byId('pref-dir-imports').value.trim();
+  settingsCache.usmap_path = byId('pref-usmap-path').value.trim();
+  settingsCache.remember_paths = byId('pref-remember-paths').checked;
+  settingsCache.proc_hide_system = byId('pref-proc-hide-system').checked;
+  settingsCache.proc_sort = byId('pref-proc-sort').value;
+
+  for (const [k, v] of Object.entries(settingsCache)) {
+    await App.SetPreference(k, String(v));
+  }
+  document.body.classList.toggle('reduce-motion', settingsCache.reduce_motion);
+  showNotification('Settings saved successfully!', 'success');
 }
 
-function applyTheme(theme) {
-    const body = document.body;
-    
-    // Remove existing theme classes
-    body.classList.remove('light-theme', 'dark-theme');
-    
-    // Apply the new theme
-    if (theme === 'light') {
-        body.classList.add('light-theme');
-    } else {
-        body.classList.add('dark-theme');
+async function resetDefaults() {
+  const defaults = {
+    reduce_motion: false,
+    logs_clear_on_launch: true,
+    logs_max_lines: 0,
+    dir_mods: '',
+    dir_exports: '',
+    dir_imports: '',
+    usmap_path: '',
+    remember_paths: true,
+    proc_hide_system: false,
+    proc_sort: 'name'
+  };
+  for (const [k, v] of Object.entries(defaults)) {
+    await App.SetPreference(k, String(v));
+  }
+}
+
+function exportSettings() {
+  const data = settingsCache;
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'aris-settings-backup.json';
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+}
+
+async function importSettingsFromFile(e) {
+  const file = e.target.files?.[0];
+  if (!file) return;
+  try {
+    const text = await file.text();
+    const obj = JSON.parse(text);
+    for (const [k, v] of Object.entries(obj)) {
+      if (k in settingsCache) await App.SetPreference(k, String(v));
     }
-    
-    // Save the theme preference
-    App.SetPreference('theme', theme);
+    await loadSettings();
+    showNotification('Settings restored from backup', 'success');
+  } catch (err) {
+    console.error('Import failed:', err);
+    showNotification('Failed to restore settings: invalid file', 'error');
+  } finally {
+    e.target.value = '';
+  }
 }
 
-// Utility Functions
+// Utility
 async function browseFolder(inputId) {
     try {
         const title = `Select folder for ${inputId.replace('-', ' ')}`;
@@ -840,7 +1187,9 @@ async function browseFolder(inputId) {
                 updateImportFileCount();
             }
 
-            await App.SetLastUsedPath(key, result);
+            if (settingsCache.remember_paths) {
+                await App.SetLastUsedPath(key, result);
+            }
         }
     } catch (error) {
         console.error('Error browsing folder:', error);
@@ -857,8 +1206,9 @@ async function browseFile(inputId) {
         const result = await App.BrowseFile(title, filter, key);
         if (result) {
             document.getElementById(inputId).value = result;
-
-            await App.SetLastUsedPath(key, result);
+            if (settingsCache.remember_paths) {
+                await App.SetLastUsedPath(key, result);
+            }
         }
     } catch (error) {
         console.error('Error browsing file:', error);
@@ -872,6 +1222,12 @@ function showOutput(containerId, message, type = 'info') {
     line.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
     container.appendChild(line);
     container.scrollTop = container.scrollHeight;
+    const max = parseInt(settingsCache?.logs_max_lines || 0, 10);
+    if (max > 0) {
+        while (container.childElementCount > max) {
+            container.removeChild(container.firstElementChild);
+        }
+    }
 }
 
 function showNotification(message, type = 'info') {
@@ -928,7 +1284,7 @@ function showNotification(message, type = 'info') {
     }, 3000);
 }
 
-// Drag and Drop Support
+// Drag and Drop
 function initializeDragAndDrop() {
     const dropZones = document.querySelectorAll('.form-input[type="text"]');
     
@@ -955,4 +1311,58 @@ function initializeDragAndDrop() {
             }
         });
     });
+}
+
+
+// ----- Markdown Guide -----
+function initializeMarkdownGuide() {
+  const openBtn = document.getElementById('open-naming-guide');
+  const modal = document.getElementById('md-modal');
+  const closeBtn = document.getElementById('md-modal-close');
+  const content = document.getElementById('md-modal-content');
+  if (!openBtn || !modal || !closeBtn || !content) return;
+
+  const open = async () => {
+    try {
+      const res = await fetch('UE_Mod_Naming.md', { cache: 'no-store' });
+      const md = await res.text();
+      let html = '';
+      try {
+        html = await App.RenderMarkdown(md);
+      } catch (err) {
+        html = '';
+      }
+      content.innerHTML = html || renderMarkdownBasic(md);
+      modal.style.display = 'flex';
+    } catch (err) {
+      content.innerHTML = '<p style="color:#ff6b6b">Failed to load guide.</p>';
+      modal.style.display = 'flex';
+    }
+  };
+  const close = () => { modal.style.display = 'none'; };
+
+  openBtn.addEventListener('click', open);
+  closeBtn.addEventListener('click', close);
+  modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+}
+
+function renderMarkdownBasic(md) {
+  let s = md.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  s = s.replace(/```([\s\S]*?)```/g, function(_, code){ return '<pre><code>' + code + '</code></pre>'; });
+  s = s.replace(/^######\s+(.*)$/gm, '<h6>$1</h6>')
+       .replace(/^#####\s+(.*)$/gm, '<h5>$1</h5>')
+       .replace(/^####\s+(.*)$/gm, '<h4>$1</h4>')
+       .replace(/^###\s+(.*)$/gm, '<h3>$1</h3>')
+       .replace(/^##\s+(.*)$/gm, '<h2>$1</h2>')
+       .replace(/^#\s+(.*)$/gm, '<h1>$1</h1>');
+  s = s.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  s = s.replace(/\*(.*?)\*/g, '<em>$1</em>');
+  s = s.replace(/^\-\s+(.*)$/gm, '<li>$1</li>');
+  s = s.replace(/(?:<li>.*?<\/li>\r?\n?)+/g, function(m){ return '<ul>' + m + '</ul>'; });
+  var parts = s.split(/\n\n+/).map(function(block){
+    if (/^<h[1-6]>/.test(block) || /^<pre>/.test(block) || /^<ul>/.test(block)) return block;
+    return '<p>' + block.replace(/\n/g, '<br>') + '</p>';
+  });
+  return parts.join('\n');
 }

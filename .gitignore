@@ -60,6 +60,15 @@ frontend/bindings/
 wails.log
 test-output.txt
 
+# Local binaries built in tree
+ARI-S.exe
+ARI-S-gRPC.exe
+ARI-S-*.exe
+
+# Ignore Claude-related helper docs (explicit paths)
+CLAUDE.md
+frontend/CLAUDE.md
+
 # Workspace and exports
 exports/**
 workspace/**

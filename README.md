@@ -27,6 +27,7 @@ I plan to add more third-party and custom tools to ARI.S over time.
 - **Pack (Legacy → Zen)**: Convert edited legacy assets (.uasset/.uexp) into IoStore format (.utoc/.ucas/.pak)
 - **Unpack (Zen → Legacy)**: Extract game assets from IoStore packages to legacy layout for inspection and editing
 - **Auto-renaming**: Automatically applies UE mod naming convention (`z_modname_0001_p.*`)
+- **Mod Naming Guide**: Inline, in-app Markdown guide accessible from the Pack panel
 - **Version Support**: Auto-detection and support for Unreal Engine 4.27 through 5.5+
 
 ### UAsset Manager
@@ -36,6 +37,7 @@ I plan to add more third-party and custom tools to ARI.S over time.
 
 ### DLL Injector
 - **Process Enumeration**: Browse running processes
+- **Filtering/Sorting**: Text filter with configurable default sort (Name/PID) and option to hide common system processes
 - **Native Injection**: CreateRemoteThread-based DLL injection
 - **UAC Integration**: Automatic privilege elevation when needed
 
@@ -44,6 +46,15 @@ I plan to add more third-party and custom tools to ARI.S over time.
 - **Game Pass Support**: Extract assets from Xbox Game Pass and Windows Store games
 - **Interactive Interface**: Launches UWPInjector tool in separate console window
 - **Automatic Output**: Dumps to `%LOCALAPPDATA%\Packages\<PFN>\TempState\DUMP`
+
+<br>
+
+### Settings
+- **Accessibility**: Reduce motion/animations
+- **Console Log**: Clear on launch, maximum lines to retain
+- **Directories**: Default Mods/Exports/Imports directories, default mappings (.usmap) path, remember last used paths
+- **Process Injection**: Hide system processes, default sort (name/PID)
+- **Misc**: Backup/restore settings, reset to defaults, Save
 
 <br>
 
@@ -103,7 +114,7 @@ I plan to add more third-party and custom tools to ARI.S over time.
 2. Extract ARI-S.exe to your preferred location
 3. Run ARI-S.exe
 ```
-**First Run**: The application will automatically extract dependencies to a `dependencies` folder next to the executable.
+**First Run**: The application will automatically extract dependencies to `%APPDATA%/ARI-S/dependencies` (Windows Roaming profile), not next to the executable.
 </details>
 
 <br>
@@ -121,8 +132,8 @@ Download from: https://golang.org/dl/
 # Install Node.js 18+
 Download from: https://nodejs.org/
 
-#Install Wails CLI
-cmd: "go install github.com/wailsapp/wails/v3/cmd/wails3@latest"
+# Install Wails CLI
+go install github.com/wailsapp/wails/v3/cmd/wails3@latest
 ```
 
 #### 2. Clone the Repository
@@ -158,7 +169,7 @@ wails3 dev
 wails3 build
 ```
 
-The built executable will be located at: `build/bin/ARI-S.exe`
+The built executable will be located at: `bin/ARI-S.exe`
 
 </details>
 
@@ -167,8 +178,8 @@ The built executable will be located at: `build/bin/ARI-S.exe`
 ## Usage
 ### First Time Setup
 1. **Launch ARI-S** - Double-click `ARI-S.exe`
-2. **Automatic Extraction** - Dependencies are extracted on first run
-3. **Configuration** - Settings are stored in `%LOCALAPPDATA%\ARI-S\config.json`
+2. **Automatic Extraction** - Dependencies are extracted on first run to `%APPDATA%\ARI-S\dependencies`
+3. **Configuration** - Settings are stored in `%APPDATA%\ARI-S\config.json`
 4. **Auto-Save** - All paths and preferences are automatically saved
 
 <br>
@@ -256,7 +267,7 @@ z_modname_0001_p.pak
 **First Time Setup**:
 1. Download UWPDumper from [GitHub Releases](https://github.com/Wunkolo/UWPDumper/releases)
 2. Extract `UWPInjector.exe` and `UWPDumper.dll` from the archive
-3. Place both files in: `dependencies/uwpdumper/`
+3. Place both files in: `%APPDATA%/ARI-S/dependencies/uwpdumper/`
 4. Restart ARI-S (or launch for first time)
 
 **Usage**:
@@ -308,13 +319,14 @@ ARI-S/
 
 ### Configuration Location
 ```
-C:\Users\<Username>\AppData\Local\ARI-S\config.json
+C:\Users\<Username>\AppData\Roaming\ARI-S\config.json
 ```
 **Configuration stores**:
-- Last used paths for all operations
+- Last used paths (mods, exports, imports, mappings, DLL, etc.)
 - Preferred Unreal Engine version
-- UI theme (dark/light)
-- Other application preferences
+- Accessibility and console preferences (reduce motion, clear on launch, max lines)
+- Directory defaults (mods/exports/imports, mappings path) and path memory preference
+- Process list preferences (hide system processes, default sort)
 
 <br>
 
@@ -323,7 +335,7 @@ C:\Users\<Username>\AppData\Local\ARI-S\config.json
 <details>
 <summary><b>"Dependencies not found" error</b></summary>
 
-**Solution**: Ensure the `dependencies` folder exists next to `ARI-S.exe`. Delete it and restart to re-extract.
+**Solution**: Ensure the `dependencies` folder exists at `%APPDATA%\ARI-S\dependencies`. Delete that folder and restart ARI-S to re-extract.
 </details>
 
 <details>
@@ -356,7 +368,7 @@ C:\Users\<Username>\AppData\Local\ARI-S\config.json
 <details>
 <summary><b>Configuration not saving</b></summary>
 
-**Solution**: Check that `%LOCALAPPDATA%\ARI-S\` is writable
+**Solution**: Check that `%APPDATA%\ARI-S\` is writable
 </details>
 
 ### Debug Logs
@@ -418,7 +430,7 @@ This starts the app with **hot-reload** enabled for frontend changes.
 <br>
 
 ### Architecture Notes
-All external dependencies are embedded in the executable at compile-time using Go's `embed` package. On first run, these are extracted to a `dependencies` folder. The application checks `version.txt` and automatically re-extracts if the version changes, ensuring seamless updates.
+All external dependencies are embedded in the executable at compile-time using Go's `embed` package. On first run, these are extracted to `%APPDATA%/ARI-S/dependencies`. The application checks `dependencies/version.txt` and automatically re-extracts if the version changes, ensuring seamless updates.
 
 <br>
 

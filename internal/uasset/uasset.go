@@ -1,5 +1,5 @@
-//go:build !cgo
-// +build !cgo
+//go:build !grpc
+// +build !grpc
 
 package uasset
 

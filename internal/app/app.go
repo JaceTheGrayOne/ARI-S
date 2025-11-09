@@ -1,15 +1,20 @@
 package app
 
 import (
-	"context"
-	"log"
-	"os"
-	"path/filepath"
-	"syscall"
-	"unsafe"
+    "bytes"
+    "context"
+    "log"
+    "os"
+    "path/filepath"
+    "syscall"
+    "unsafe"
 
-	"github.com/JaceTheGrayOne/ARI-S/internal/config"
-	"github.com/wailsapp/wails/v3/pkg/application"
+    "github.com/JaceTheGrayOne/ARI-S/internal/config"
+    "github.com/microcosm-cc/bluemonday"
+    "github.com/wailsapp/wails/v3/pkg/application"
+    "github.com/yuin/goldmark"
+    "github.com/yuin/goldmark/extension"
+    htmlrenderer "github.com/yuin/goldmark/renderer/html"
 )
 
 // App is the main application service managing lifecycle, configuration,
@@ -33,6 +38,14 @@ type App struct {
 // after creation to restore saved settings.
 func NewApp() *App {
 	return &App{}
+}
+
+// SetDepsDir sets the dependencies directory path for this App instance.
+// This should be called after NewApp and before any methods that need
+// to access dependency files.
+func (a *App) SetDepsDir(depsDir string) {
+	a.depsDir = depsDir
+	log.Printf("Dependencies directory set to: %s", depsDir)
 }
 
 // LoadConfiguration loads the application configuration from disk and stores
@@ -270,6 +283,31 @@ func (a *App) BrowseFile(title, filter, key string) string {
 	return result
 }
 
+// RenderMarkdown converts Markdown text to sanitized HTML using Goldmark
+// and Bluemonday for XSS-safe output in the WebView.
+func (a *App) RenderMarkdown(md string) string {
+    gm := goldmark.New(
+        goldmark.WithExtensions(
+            extension.GFM,
+            extension.Strikethrough,
+            extension.Linkify,
+        ),
+        goldmark.WithRendererOptions(
+            htmlrenderer.WithHardWraps(),
+            htmlrenderer.WithUnsafe(),
+        ),
+    )
+
+    var buf bytes.Buffer
+    if err := gm.Convert([]byte(md), &buf); err != nil {
+        log.Printf("RenderMarkdown convert error: %v", err)
+        return md
+    }
+
+    safe := bluemonday.UGCPolicy().Sanitize(buf.String())
+    return safe
+}
+
 // openWindowsFileDialog opens a Windows file selection dialog
 func (a *App) openWindowsFileDialog(title, filter, initialPath string) string {
 	// Load comdlg32.dll
@@ -368,4 +406,32 @@ func (a *App) openWindowsFileDialog(title, filter, initialPath string) string {
 
 	// Convert back to Go string
 	return syscall.UTF16ToString(fileBuffer)
+}
+
+// GetDumper7Path returns the full path to the Dumper7.dll file in the
+// dependencies directory. Returns an empty string if the dependencies
+// directory has not been set.
+func (a *App) GetDumper7Path() string {
+	if a.depsDir == "" {
+		log.Printf("Warning: Dependencies directory not set, cannot locate Dumper7.dll")
+		return ""
+	}
+
+	dumper7Path := filepath.Join(a.depsDir, "Dumper7", "Dumper7.dll")
+	log.Printf("Dumper7.dll path: %s", dumper7Path)
+	return dumper7Path
+}
+
+// GetUnrealMappingsDumperPath returns the full path to the UnrealMappingsDumper.dll
+// file in the dependencies directory. Returns an empty string if the dependencies
+// directory has not been set.
+func (a *App) GetUnrealMappingsDumperPath() string {
+	if a.depsDir == "" {
+		log.Printf("Warning: Dependencies directory not set, cannot locate UnrealMappingsDumper.dll")
+		return ""
+	}
+
+	mappingsDumperPath := filepath.Join(a.depsDir, "UnrealMappingsDumper", "UnrealMappingsDumper.dll")
+	log.Printf("UnrealMappingsDumper.dll path: %s", mappingsDumperPath)
+	return mappingsDumperPath
 }

@@ -182,7 +182,11 @@ func (i *InjectorService) injectDLL(ctx context.Context, targetPID uint32, dllPa
 	// - PROCESS_VM_OPERATION: Required by VirtualAllocEx
 	// - PROCESS_VM_WRITE: Required by WriteProcessMemory
 	// - PROCESS_CREATE_THREAD: Required by CreateRemoteThread
-	const requiredAccess = windows.PROCESS_VM_OPERATION | windows.PROCESS_VM_WRITE | windows.PROCESS_CREATE_THREAD
+	const requiredAccess = windows.PROCESS_CREATE_THREAD |
+		windows.PROCESS_QUERY_INFORMATION |
+		windows.PROCESS_VM_OPERATION |
+		windows.PROCESS_VM_WRITE |
+		windows.PROCESS_VM_READ
 
 	processHandle, err := windows.OpenProcess(requiredAccess, false, targetPID)
 	if err != nil {

@@ -1,15 +1,17 @@
 package main
 
 import (
-	"embed"
-	"log"
+    "embed"
+    "log"
+    "os"
+    "path/filepath"
 
-	"github.com/JaceTheGrayOne/ARI-S/internal/app"
-	"github.com/JaceTheGrayOne/ARI-S/internal/injector"
-	"github.com/JaceTheGrayOne/ARI-S/internal/retoc"
-	"github.com/JaceTheGrayOne/ARI-S/internal/uasset"
-	"github.com/JaceTheGrayOne/ARI-S/internal/uwpdumper"
-	"github.com/wailsapp/wails/v3/pkg/application"
+    "github.com/JaceTheGrayOne/ARI-S/internal/app"
+    "github.com/JaceTheGrayOne/ARI-S/internal/injector"
+    "github.com/JaceTheGrayOne/ARI-S/internal/retoc"
+    "github.com/JaceTheGrayOne/ARI-S/internal/uasset"
+    "github.com/JaceTheGrayOne/ARI-S/internal/uwpdumper"
+    "github.com/wailsapp/wails/v3/pkg/application"
 )
 
 // assets holds the embedded frontend build output from frontend/dist.
@@ -20,21 +22,55 @@ import (
 var assets embed.FS
 
 // depsFS holds the embedded external dependencies extracted on first run.
-// This includes retoc.exe, oo2core_9_win64.dll, UAssetBridge.exe, and
-// the .NET runtime DLLs required for UAsset operations.
+// This includes retoc.exe, oo2core_9_win64.dll, UAssetBridge.exe,
+// the .NET runtime DLLs required for UAsset operations, Dumper7.dll,
+// and UnrealMappingsDumper.dll for SDK and mappings dumping.
 //
 //go:embed dependencies
 var depsFS embed.FS
 
+// Embed the managed entry assembly produced by the bridge publish output.
+// This guards against environments where the embedded dependencies folder
+// might be missing UAssetBridge.dll (the managed assembly), even though the
+// apphost UAssetBridge.exe is present.
+//go:embed build/UAssetBridge.dll
+var uassetBridgeManagedDLL []byte
+
 func main() {
-	extractedDepsDir, err := app.EnsureDependencies(depsFS)
-	if err != nil {
-		log.Fatalf("Fatal error during dependency setup: %v", err)
+	// Extract native libraries first (if CGO is enabled)
+	if err := initNativeLibraries(); err != nil {
+		log.Fatalf("Fatal error during native library setup: %v", err)
 	}
-	log.Printf("Dependencies directory: %s", extractedDepsDir)
+
+    extractedDepsDir, err := app.EnsureDependencies(depsFS)
+    if err != nil {
+        log.Fatalf("Fatal error during dependency setup: %v", err)
+    }
+    log.Printf("Dependencies directory: %s", extractedDepsDir)
+
+    // Ensure UAssetBridge.dll exists next to UAssetBridge.exe. Some builds may
+    // only include the apphost EXE; .NET still expects the managed DLL listed
+    // in the deps.json. If it's missing, provide the embedded copy from build/.
+    {
+        dllPath := filepath.Join(extractedDepsDir, "UAssetAPI", "UAssetBridge.dll")
+        if _, statErr := os.Stat(dllPath); os.IsNotExist(statErr) {
+            if len(uassetBridgeManagedDLL) == 0 {
+                log.Printf("Warning: Embedded UAssetBridge.dll not available; cannot repair missing managed assembly")
+            } else {
+                if writeErr := os.WriteFile(dllPath, uassetBridgeManagedDLL, 0644); writeErr != nil {
+                    log.Printf("Warning: Failed to write UAssetBridge.dll: %v", writeErr)
+                } else {
+                    log.Printf("Restored missing UAssetBridge.dll to: %s", dllPath)
+                }
+            }
+        }
+    }
 
 	// Create a new App instance
 	appInstance := app.NewApp()
+
+	// Set the dependencies directory
+	appInstance.SetDepsDir(extractedDepsDir)
 
 	// Load configuration before starting Wails
 	log.Println("Loading application configuration...")
@@ -54,6 +90,10 @@ func main() {
 		},
 		Mac: application.MacOptions{
 			ApplicationShouldTerminateAfterLastWindowClosed: true,
+		},
+		Windows: application.WindowsOptions{
+			// Store WebView2 data in ARI-S folder instead of ARI-S.exe folder
+			WebviewUserDataPath: filepath.Join(extractedDepsDir, "..", "webview"),
 		},
 	})
 

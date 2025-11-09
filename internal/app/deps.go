@@ -74,7 +74,8 @@ func EnsureDependencies(depsFS embed.FS) (string, error) {
 func isExecutable(path string) bool {
 	// On Windows, .exe files are executable
 	if runtime.GOOS == "windows" {
-		return strings.HasSuffix(strings.ToLower(path), ".exe")
+		lowerPath := strings.ToLower(path)
+		return strings.HasSuffix(lowerPath, ".exe") || strings.HasSuffix(lowerPath, ".dll")
 	}
 
 	// On Unix-like systems, check for known executables
