@@ -79,11 +79,11 @@ I plan to add more third-party and custom tools to ARI.S over time.
 <td width="33%" valign="top">
 
 ### External Tools
-[![Retoc](https://img.shields.io/badge/Retoc-E5C64F?style=for-the-badge&logoColor=white)](https://github.com/WorkingRobot/Retoc)
-[![UAssetAPI](https://img.shields.io/badge/UAssetAPI-6886E0?style=for-the-badge&logoColor=white)](https://github.com/atenfyr/UAssetAPI)
-[![UWPDumper](https://img.shields.io/badge/UWPDumper-58D37A?style=for-the-badge&logoColor=white)](https://github.com/Wunkolo/UWPDumper)
-[![Dumper7](https://img.shields.io/badge/Dumper7-58D37A?style=for-the-badge&logoColor=white)](https://github.com/Encryqed/Dumper-7)
-[![UnrealMappingsDumper](https://img.shields.io/badge/UnrealMappingsDumper-6886E0?style=for-the-badge&logoColor=white)](https://github.com/TheNaeem/UnrealMappingsDumper)
+[![Retoc](https://img.shields.io/badge/Retoc-D78D47?style=for-the-badge&logoColor=white)](https://github.com/WorkingRobot/Retoc)
+[![UAssetAPI](https://img.shields.io/badge/UAssetAPI-3B82F6?style=for-the-badge&logoColor=white)](https://github.com/atenfyr/UAssetAPI)
+[![UWPDumper](https://img.shields.io/badge/UWPDumper-4CAF50?style=for-the-badge&logoColor=white)](https://github.com/Wunkolo/UWPDumper)
+[![Dumper7](https://img.shields.io/badge/Dumper7-D56B67?style=for-the-badge&logoColor=white)](https://github.com/Encryqed/Dumper-7)
+[![UnrealMappingsDumper](https://img.shields.io/badge/UnrealMappingsDumper-D56B67?style=for-the-badge&logoColor=white)](https://github.com/TheNaeem/UnrealMappingsDumper)
 
 </td>
 </tr>
