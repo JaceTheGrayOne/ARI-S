@@ -52,6 +52,11 @@ dist/
 dist/**
 frontend/bindings/
 
+# Remove stray tracked binaries from earlier structure
+retoc/*.exe
+retoc/*.dll
+test/*.exe
+
 # Development and tooling
 .claude/
 .task/
@@ -74,6 +79,7 @@ exports/**
 workspace/**
 logs/**
 secrets/**
+csharp_errors.txt
 
 # User data
 config.json
