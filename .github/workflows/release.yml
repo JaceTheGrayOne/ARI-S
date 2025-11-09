@@ -154,9 +154,7 @@ jobs:
           $ARCHIVE_NAME = "ARI-S-v$VERSION-windows-x64.zip"
           New-Item -ItemType Directory -Path "release-package" -Force | Out-Null
           Copy-Item "bin/ARI-S.exe" "release-package/" -Force
-          Copy-Item "README.md" -Destination "release-package/" -Force -ErrorAction SilentlyContinue
           Copy-Item "CREDITS.md" -Destination "release-package/" -Force -ErrorAction SilentlyContinue
-          Copy-Item "BUILDING.md" -Destination "release-package/" -Force -ErrorAction SilentlyContinue
           Compress-Archive -Path "release-package/*" -DestinationPath $ARCHIVE_NAME -Force
           echo "archive_name=$ARCHIVE_NAME" >> $env:GITHUB_OUTPUT
 

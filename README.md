@@ -82,6 +82,10 @@ I plan to add more third-party and custom tools to ARI.S over time.
 [![Retoc](https://img.shields.io/badge/Retoc-8A2BE2?style=for-the-badge&logoColor=white)](https://github.com/WorkingRobot/Retoc)
 [![UAssetAPI](https://img.shields.io/badge/UAssetAPI-2E8B57?style=for-the-badge&logoColor=white)](https://github.com/atenfyr/UAssetAPI)
 [![UWPDumper](https://img.shields.io/badge/UWPDumper-FF6B6B?style=for-the-badge&logoColor=white)](https://github.com/Wunkolo/UWPDumper)
+<br/>
+Also used:
+- Dumper7 — https://github.com/Encryqed/Dumper-7 (MIT)
+- Unreal Mappings Dumper — https://github.com/TheNaeem/UnrealMappingsDumper (MIT)
 
 </td>
 </tr>
@@ -459,6 +463,9 @@ This is an active development project. Contributions are welcome!
 |------|-------------|------|
 | **Retoc** | IoStore package conversion tool | [GitHub](https://github.com/WorkingRobot/Retoc) |
 | **UAssetAPI** | .NET library for UAsset serialization | [GitHub](https://github.com/atenfyr/UAssetAPI) |
+| **UWPDumper** | UWP package dump/attach tool | [GitHub](https://github.com/Wunkolo/UWPDumper) |
+| **Dumper7** | Unreal SDK dumper | [GitHub](https://github.com/Encryqed/Dumper-7) |
+| **Unreal Mappings Dumper** | Unreal mappings dumper | [GitHub](https://github.com/TheNaeem/UnrealMappingsDumper) |
 | **Wails** | Desktop application framework | [Website](https://wails.io) |
 | **Oodle** | Compression library | oo2core_9_win64.dll |
 
@@ -467,6 +474,7 @@ This is an active development project. Contributions are welcome!
 ## License
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 This project is for **educational and modding purposes**.
+Third‑party components are used under their respective MIT licenses. See `docs/licenses/THIRD_PARTY_NOTICES.md`.
 
 <br>
 
