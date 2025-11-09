@@ -106,8 +106,21 @@ jobs:
           wails3 task windows:build
           if (-not (Test-Path "bin/ARI-S.exe")) { Write-Error "Binary not found at bin/ARI-S.exe"; exit 1 }
 
+      - name: Determine if code signing is enabled
+        id: signflag
+        shell: pwsh
+        env:
+          HAS_PFX: ${{ secrets.WIN_CODE_SIGN_PFX_B64 }}
+          HAS_PASS: ${{ secrets.WIN_CODE_SIGN_PFX_PASSWORD }}
+        run: |
+          if (($env:HAS_PFX) -and ($env:HAS_PASS)) {
+            echo "do_sign=true" >> $env:GITHUB_OUTPUT
+          } else {
+            echo "do_sign=false" >> $env:GITHUB_OUTPUT
+          }
+
       - name: Code sign executable (if certificate provided)
-        if: ${{ secrets.WIN_CODE_SIGN_PFX_B64 != '' && secrets.WIN_CODE_SIGN_PFX_PASSWORD != '' }}
+        if: steps.signflag.outputs.do_sign == 'true'
         shell: pwsh
         env:
           WIN_CODE_SIGN_PFX_B64: ${{ secrets.WIN_CODE_SIGN_PFX_B64 }}
